@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import CountdownTimer from "./CountdownTimer";
 import { MapPin, Calendar, Users, Ship, Euro } from "lucide-react";
 
@@ -61,13 +62,16 @@ const CruiseCard = ({
         {/* Spots badge */}
         <div className="absolute top-4 right-4">
           <span
-            className={`inline-block text-xs font-body font-bold uppercase tracking-wider px-3 py-1.5 rounded-full ${
-              urgency
-                ? "bg-sunset text-primary-foreground animate-pulse"
-                : "bg-accent text-accent-foreground"
-            }`}
+            className={`inline-block text-xs font-body font-bold uppercase tracking-wider px-3 py-1.5 rounded-full ${spotsLeft === totalSpots && ["Karaiby", "Tajlandia", "Włochy"].some(k => title.includes(k))
+              ? "bg-muted text-muted-foreground"
+              : spotsLeft === 0
+                ? "bg-muted text-muted-foreground"
+                : urgency
+                  ? "bg-sunset text-primary-foreground animate-pulse"
+                  : "bg-accent text-accent-foreground"
+              }`}
           >
-            {urgency ? `Ostatnie ${spotsLeft} miejsca!` : `${spotsLeft} wolnych miejsc`}
+            {spotsLeft === totalSpots && ["Karaiby", "Tajlandia", "Włochy"].some(k => title.includes(k)) ? "W planowaniu" : spotsLeft === 0 ? "Brak miejsc" : urgency ? `Ostatnie ${spotsLeft} miejsca!` : `${spotsLeft} wolnych miejsc`}
           </span>
         </div>
       </div>
@@ -131,14 +135,27 @@ const CruiseCard = ({
             </div>
           </div>
 
-          <a
-            href="https://rybka.fun/zgloszenie/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-6 w-full inline-flex items-center justify-center px-6 py-3.5 bg-primary text-primary-foreground font-body font-semibold rounded-xl shadow-ocean hover:shadow-card-hover hover:scale-[1.02] transition-all duration-300"
-          >
-            Zapisz się na rejs ⛵
-          </a>
+          {spotsLeft === totalSpots && ["Karaiby", "Tajlandia", "Włochy"].some(k => title.includes(k)) ? (
+            <div className="mt-6 w-full inline-flex items-center justify-center px-6 py-3.5 bg-muted text-muted-foreground font-body text-sm font-semibold rounded-xl text-center">
+              Zapisy wkrótce
+            </div>
+          ) : spotsLeft === 0 ? (
+            <Link
+              to={`/galeria/${title.toLowerCase().replace(/\s+/g, '-')}`}
+              className="mt-6 w-full inline-flex items-center justify-center px-6 py-3.5 bg-muted text-muted-foreground font-body text-sm font-semibold rounded-xl text-center hover:bg-secondary hover:text-secondary-foreground transition-all duration-300"
+            >
+              Ten rejs to już historia, otwórz galerię
+            </Link>
+          ) : (
+            <a
+              href="https://rybka.fun/zgloszenie/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-6 w-full inline-flex items-center justify-center px-6 py-3.5 bg-primary text-primary-foreground font-body font-semibold rounded-xl shadow-ocean hover:shadow-card-hover hover:scale-[1.02] transition-all duration-300"
+            >
+              Zapisz się na rejs ⛵
+            </a>
+          )}
         </div>
       </div>
     </motion.div>
