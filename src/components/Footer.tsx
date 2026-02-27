@@ -13,7 +13,7 @@ const Footer = () => {
           </div>
           <div className="flex items-center gap-2 text-primary-foreground/70 font-body text-sm">
             <Mail size={16} />
-            <span>Skontaktuj się z nami na rybka.fun</span>
+            <span>kontakt@rybka.fun</span>
           </div>
           <p className="text-primary-foreground/50 font-body text-sm">
             © 2026 Rybka.fun — Rejsy Żeglarskie

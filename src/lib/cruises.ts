@@ -13,7 +13,7 @@ export const cruises = [
         targetDate: new Date("2026-02-07"),
         location: "Teneryfa, Hiszpania",
         price: "500",
-        spots: 7,
+        spots: 10,
         totalSpots: 10,
         yacht: "Bavaria Cruiser 51",
         description:
@@ -27,22 +27,22 @@ export const cruises = [
         targetDate: new Date("2026-08-15"),
         location: "Marina Kalamaki, Ateny",
         price: "700",
-        spots: 12,
+        spots: 4,
         totalSpots: 20,
         yacht: "Oceanis 46 + Sun Odyssey 515",
         description:
             "Kotwicowiska, zatoczki, regaty, pływanie rano i wieczorem, jazda pontonem, SUP i na maxa fun! Dwa jachty pod okiem kapitanów Michała i Grześka.",
     },
     {
-        title: "Chorwacja",
+        title: "Grecja — Rejs 2",
         subtitle: "Rejs Wakacyjny",
         image: croatiaImg,
         date: "22.08 – 29.08.2026",
         targetDate: new Date("2026-08-22"),
         location: "Marina Kalamaki → Adriatyk",
         price: "700",
-        spots: 8,
-        totalSpots: 20,
+        spots: 2,
+        totalSpots: 10,
         yacht: "Oceanis 46 + Sun Odyssey 515",
         description:
             "Kontynuacja letniej przygody! Kotwicowiska, kryształowo czysta woda Adriatyku, malownicze wyspy i niezapomniane widoki z pokładu jachtu.",
@@ -55,7 +55,7 @@ export const cruises = [
         targetDate: new Date("2027-01-10"),
         location: "Martynika, Karaiby",
         price: "1500",
-        spots: 10,
+        spots: 0,
         totalSpots: 10,
         yacht: "Catamaran Lagoon 450",
         description:
@@ -69,7 +69,7 @@ export const cruises = [
         targetDate: new Date("2026-12-05"),
         location: "Phuket, Tajlandia",
         price: "1200",
-        spots: 8,
+        spots: 0,
         totalSpots: 12,
         yacht: "Catamaran Nautitech 46",
         description:
@@ -83,7 +83,7 @@ export const cruises = [
         targetDate: new Date("2026-09-12"),
         location: "Salerno, Włochy",
         price: "850",
-        spots: 6,
+        spots: 0,
         totalSpots: 10,
         yacht: "Beneteau Oceanis 48",
         description:
