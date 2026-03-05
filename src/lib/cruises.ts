@@ -28,7 +28,7 @@ export const cruises = [
         location: "Marina Kalamaki, Ateny",
         price: "750",
         spots: 4,
-        totalSpots: 20,
+        totalSpots: 30,
         yacht: "Oceanis 46 + Sun Odyssey 515",
         description:
             "flotylla trzech jachtów razem, wspólne żeglowanie kotwiczenie zwiedzanie portowych miasteczek i ucztowanie, fun na maxa",
@@ -42,7 +42,7 @@ export const cruises = [
         location: "Marina Kalamaki → Adriatyk",
         price: "750",
         spots: 2,
-        totalSpots: 10,
+        totalSpots: 30,
         yacht: "Oceanis 46 + Sun Odyssey 515",
         description:
             "flotylla trzech jachtów razem, wspólne żeglowanie kotwiczenie zwiedzanie portowych miasteczek i ucztowanie, fun na maxa",

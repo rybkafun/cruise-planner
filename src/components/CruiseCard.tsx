@@ -139,12 +139,19 @@ const CruiseCard = ({
             <div className="mt-6 w-full inline-flex items-center justify-center px-6 py-3.5 bg-muted text-muted-foreground font-body text-sm font-semibold rounded-xl text-center">
               Zapisy wkrótce
             </div>
+          ) : spotsLeft === 0 && title.includes("Kanaryjskie") ? (
+            <Link
+              to={`/galeria/wyspy-kanaryjskie`}
+              className="mt-6 w-full inline-flex items-center justify-center px-6 py-3.5 bg-primary text-primary-foreground font-body font-semibold rounded-xl shadow-ocean hover:shadow-card-hover hover:scale-[1.02] transition-all duration-300 text-sm"
+            >
+              Zobacz jak było
+            </Link>
           ) : spotsLeft === 0 ? (
             <Link
               to={`/galeria/${title.toLowerCase().replace(/\s+/g, '-')}`}
               className="mt-6 w-full inline-flex items-center justify-center px-6 py-3.5 bg-muted text-muted-foreground font-body text-sm font-semibold rounded-xl text-center hover:bg-secondary hover:text-secondary-foreground transition-all duration-300"
             >
-              Ten rejs to już historia, otwórz galerię
+              Wejdź do galerii
             </Link>
           ) : title.includes("Grecja") ? (
             <Link
