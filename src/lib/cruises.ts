@@ -17,7 +17,7 @@ export const cruises = [
         totalSpots: 10,
         yacht: "Bavaria Cruiser 51",
         description:
-            "Start z Marina San Miguel na Teneryfie Południowej. Trasa w kierunku Gran Canaria lub La Gomera — w zależności od pogody. Doskonały rejs na odkrycie nowych terenów i nowych szlaków.",
+            "Start z Marina San Miguel na Teneryfie Południowej. Trasa w kierunku wyspy Gran Canaria port Mogan i Pasito Blanco. Rejs zakończony.",
     },
     {
         title: "Grecja — Rejs 1",
@@ -29,9 +29,9 @@ export const cruises = [
         price: "750",
         spots: 4,
         totalSpots: 30,
-        yacht: "Oceanis 46 + Sun Odyssey 515",
+        yacht: "Cyclades 51",
         description:
-            "flotylla trzech jachtów razem, wspólne żeglowanie kotwiczenie zwiedzanie portowych miasteczek i ucztowanie, fun na maxa",
+            "Flotylla trzech jachtów razem, wspólne żeglowanie, kotwiczenie zwiedzanie portowych miasteczek i ucztowanie, fun na maxa. Trasa zalezy od warunkow pogodowych.",
     },
     {
         title: "Grecja — Rejs 2",
@@ -39,13 +39,13 @@ export const cruises = [
         image: croatiaImg,
         date: "22.08 – 29.08.2026",
         targetDate: new Date("2026-08-22"),
-        location: "Marina Kalamaki → Adriatyk",
+        location: "Marina Kalamaki → Ateny",
         price: "750",
         spots: 2,
         totalSpots: 30,
-        yacht: "Oceanis 46 + Sun Odyssey 515",
+        yacht: "Cyklades 51",
         description:
-            "flotylla trzech jachtów razem, wspólne żeglowanie kotwiczenie zwiedzanie portowych miasteczek i ucztowanie, fun na maxa",
+            "Flotylla trzech jachtów razem, wspólne żeglowanie kotwiczenie zwiedzanie portowych miasteczek i ucztowanie, fun na maxa. Trasa zalezy od warunkow pogodowych.",
     },
     {
         title: "Karaiby – Rejs Marzeń",
