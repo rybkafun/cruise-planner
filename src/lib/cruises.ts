@@ -27,7 +27,7 @@ export const cruises = [
         targetDate: new Date("2026-08-15"),
         location: "Marina Kalamaki, Ateny",
         price: "750",
-        spots: 4,
+        spots: 12,
         totalSpots: 30,
         yacht: "Cyclades 51",
         description:
@@ -41,7 +41,7 @@ export const cruises = [
         targetDate: new Date("2026-08-22"),
         location: "Marina Kalamaki → Ateny",
         price: "750",
-        spots: 2,
+        spots: 11,
         totalSpots: 30,
         yacht: "Cyklades 51",
         description:
