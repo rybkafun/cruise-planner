@@ -1,14 +1,25 @@
 import { useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Ship, ArrowLeft, Send } from "lucide-react";
 import { toast } from "sonner";
 import { cruises } from "../lib/cruises";
 import heroImage from "@/assets/hero-sailing.jpg";
+import {
+    Dialog,
+    DialogContent,
+    DialogHeader,
+    DialogTitle,
+    DialogDescription,
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
 
 const BookingForm = () => {
     const { id } = useParams();
+    const navigate = useNavigate();
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [showFullModal, setShowFullModal] = useState(false);
+    const [fullCaptainName, setFullCaptainName] = useState("");
 
     const cruise = id ? cruises.find(c => c.title.toLowerCase().replace(/\s+/g, '-') === id) : null;
 
@@ -43,6 +54,15 @@ const BookingForm = () => {
             });
 
             if (!response.ok) {
+                if (response.status === 409) {
+                    const errorData = await response.json().catch(() => ({}));
+                    if (errorData.error === "CAPTAIN_FULL") {
+                        setFullCaptainName(errorData.captain || payload.captain);
+                        setShowFullModal(true);
+                        setIsSubmitting(false);
+                        return;
+                    }
+                }
                 throw new Error("Błąd podczas wysyłania zgłoszenia");
             }
 
@@ -201,6 +221,28 @@ const BookingForm = () => {
                     </form>
                 </motion.div>
             </main>
+
+            <Dialog open={showFullModal} onOpenChange={setShowFullModal}>
+                <DialogContent className="sm:max-w-[425px]">
+                    <DialogHeader>
+                        <DialogTitle>Brak wolnych miejsc</DialogTitle>
+                        <DialogDescription className="text-base text-foreground mt-4 leading-relaxed">
+                            Tu kapitan {fullCaptainName}, mam jacht wypełniony po brzegi w tym terminie. Wybierz inny termin lub skontaktuj się z nami, z pewnością coś wymyślimy.
+                        </DialogDescription>
+                    </DialogHeader>
+                    <div className="flex justify-center mt-6">
+                        <Button
+                            onClick={() => {
+                                setShowFullModal(false);
+                                navigate("/");
+                            }}
+                            className="w-full"
+                        >
+                            Płynę w innym terminie
+                        </Button>
+                    </div>
+                </DialogContent>
+            </Dialog>
         </div>
     );
 };

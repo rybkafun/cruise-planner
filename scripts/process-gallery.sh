@@ -45,10 +45,13 @@ while true; do
           sips -s format jpeg -Z 600 "$file" --out "$THUMB_DIR/$name.jpg" >/dev/null 2>&1
           
           if ! grep -q "\"$name.jpg\"" "$TS_FILE"; then
-             # Bezpieczne usunięcie zamkniecia tablicy `];`
-             sed -i '' '/^[[:space:]]*\];/d' "$TS_FILE"
-             echo "  \"$name.jpg\"," >> "$TS_FILE"
-             echo "];" >> "$TS_FILE"
+             # Bezpieczne dodanie ze zrobieniem nowej tablicy na podstawie starej (aby zachowac inode dla Vite!)
+             head -n -1 "$TS_FILE" > "$TS_FILE.tmp"
+             echo "  \"$name.jpg\"," >> "$TS_FILE.tmp"
+             echo "];" >> "$TS_FILE.tmp"
+             # Zapis przez cat, co zachowuje inode w systemie plików i nie "odpina" podglądu Vite
+             cat "$TS_FILE.tmp" > "$TS_FILE"
+             rm -f "$TS_FILE.tmp"
           fi
           
           rm -f "$file"
@@ -81,11 +84,13 @@ while true; do
         fi
       done < "$TS_FILE"
       
-      # Dopiero po zebraniu braków usuwamy je z pliku (aby nie modyfikować pliku podczas czytania)
+      # Dopiero po zebraniu braków usuwamy je z pliku, zachowując ten sam inode
       for img_file in "${missing_files[@]}"; do
         echo "🗑️ Wykryto usunięcie: $img_file z galerii $gallery_name. Aktualizuję kod..."
         rm -f "$dest_dir/thumb/$img_file"
-        sed -i '' "/\"$img_file\"/d" "$TS_FILE"
+        grep -v "\"$img_file\"" "$TS_FILE" > "$TS_FILE.tmp"
+        cat "$TS_FILE.tmp" > "$TS_FILE"
+        rm -f "$TS_FILE.tmp"
         echo "✅ Usunięto wpis o $img_file ze źródła."
       done
     fi

@@ -58,6 +58,47 @@ export const handler: Handler = async (event) => {
         addFieldIfPresent("Kapitan", body.captain);
         addFieldIfPresent("OSobie", body.message);
 
+        // Check current captain's reservations count for this specific cruise
+        if (body.captain && body.cruise) {
+            const formula = `AND({Kapitan}='${body.captain}', {Rejs}='${body.cruise}')`;
+            const checkUrl = new URL(`https://api.airtable.com/v0/${airtableBaseId}/${encodeURIComponent(airtableTableId)}`);
+            checkUrl.searchParams.append("filterByFormula", formula);
+
+            const checkResponse = await fetch(checkUrl.toString(), {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${airtablePat}`,
+                },
+            });
+
+            if (checkResponse.ok) {
+                const checkData = await checkResponse.json();
+                if (checkData.records && checkData.records.length >= 10) {
+                    return {
+                        statusCode: 409,
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            error: "CAPTAIN_FULL",
+                            captain: body.captain
+                        })
+                    };
+                }
+            } else {
+                const errorText = await checkResponse.text();
+                console.error("Failed to check existing records in Airtable", errorText);
+
+                // If it's a 404, it means the Base/Table is wrong, don't silently create records ignoring capacity.
+                if (checkResponse.status === 404) {
+                    return {
+                        statusCode: 500,
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ error: "Airtable configuration error (NOT_FOUND)" })
+                    };
+                }
+                // Otherwise proceed if it's a flaky network issue
+            }
+        }
+
         const response = await fetch(`https://api.airtable.com/v0/${airtableBaseId}/${encodeURIComponent(airtableTableId)}`, {
             method: "POST",
             headers: {
