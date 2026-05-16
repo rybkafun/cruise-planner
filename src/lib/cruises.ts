@@ -42,8 +42,8 @@ export const cruises = [
         targetDate: new Date("2026-08-15"),
         location: "Marina Kalamaki, Ateny",
         price: "700",
-        spots: 8,
-        totalSpots: 30,
+        spots: 19,
+        totalSpots: 20,
         yacht: "Bavaria Cruiser 51",
         description:
             "Dwa jachty razem, wspólne żeglowanie, kotwiczenie zwiedzanie portowych miasteczek i ucztowanie, fun na maxa. Trasa zalezy od warunkow pogodowych.",
@@ -56,11 +56,25 @@ export const cruises = [
         targetDate: new Date("2026-08-22"),
         location: "Marina Kalamaki → Ateny",
         price: "700",
-        spots: 0,
+        spots: 21,
         totalSpots: 22,
         yacht: "Cyklades 51",
         description:
             "Flotylla trzech jachtów razem, wspólne żeglowanie kotwiczenie zwiedzanie portowych miasteczek i ucztowanie, fun na maxa. Trasa zalezy od warunkow pogodowych.",
+    },
+    {
+        title: "Włochy – Wybrzeże Amalfi",
+        subtitle: "Dolce Vita na Morzu",
+        image: greeceImg,
+        date: "12.09 – 19.09.2026",
+        targetDate: new Date("2026-09-12"),
+        location: "Palermo na Sycylii",
+        price: "850",
+        spots: 0,
+        totalSpots: 10,
+        yacht: "Beneteau Oceanis 48",
+        description:
+            "Poczuj klimat Sycyli, bliskosci Etny i pulsu Palermo. Odwiedzisz róznorodne porty wyspy. Zaplanuj z nami rejs na Wyspy Liparyjskie. Wyśmienita kuchnia i śródziemnomorski luz.",
     },
     {
         title: "Karaiby – Rejs Marzeń",
@@ -89,19 +103,5 @@ export const cruises = [
         yacht: "Catamaran Nautitech 46",
         description:
             "Żegluj po Morzu Andamańskim wśród wapiennych ostańców. Tajskie jedzenie, dzikie plaże i nocne życie na Phi Phi.",
-    },
-    {
-        title: "Włochy – Wybrzeże Amalfi",
-        subtitle: "Dolce Vita na Morzu",
-        image: greeceImg,
-        date: "12.09 – 19.09.2026",
-        targetDate: new Date("2026-09-12"),
-        location: "Salerno, Włochy",
-        price: "850",
-        spots: 0,
-        totalSpots: 10,
-        yacht: "Beneteau Oceanis 48",
-        description:
-            "Poczuj klimat włoskiego wybrzeża. Capri, Positano i Amalfi widziane z perspektywy morza. Wyśmienita kuchnia i śródziemnomorski luz.",
     },
 ];
