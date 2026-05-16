@@ -107,8 +107,9 @@ const CruiseCard = ({
         <div className="border-t border-border pt-6">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-1">
-              <Euro size={20} className="text-secondary" />
+              {!title.includes("Mazurach") && <Euro size={20} className="text-secondary" />}
               <span className="text-3xl font-display font-bold text-card-foreground">{price}</span>
+              {title.includes("Mazurach") && <span className="text-secondary font-bold ml-1">PLN</span>}
               <span className="text-sm text-muted-foreground font-body">/os.</span>
             </div>
             <span className="text-xs text-muted-foreground font-body">
@@ -153,7 +154,7 @@ const CruiseCard = ({
             >
               Wejdź do galerii
             </Link>
-          ) : title.includes("Grecja") ? (
+          ) : title.includes("Grecja") || title.includes("Mazurach") ? (
             <Link
               to={`/zapisy/${title.toLowerCase().replace(/\s+/g, '-')}`}
               target="_blank"

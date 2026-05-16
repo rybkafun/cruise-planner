@@ -3,6 +3,7 @@ import canaryImg from "@/assets/canary-islands.jpg";
 import greeceImg from "@/assets/greece-sailing.jpg";
 import croatiaImg from "@/assets/croatia-sailing.jpg";
 import heroSailingImg from "@/assets/hero-sailing.jpg";
+import mazuryImg from "@/assets/mazury-sailing.jpg";
 
 export const cruises = [
     {
@@ -18,6 +19,20 @@ export const cruises = [
         yacht: "Bavaria Cruiser 51",
         description:
             "Start z Marina San Miguel na Teneryfie Południowej. Trasa w kierunku wyspy Gran Canaria port Mogan i Pasito Blanco. Rejs zakończony.",
+    },
+    {
+        title: "Rejs Na Mazurach",
+        subtitle: "Rejs Wiosenny",
+        image: mazuryImg,
+        date: "12-14 czerwiec lub 19-21 czerwiec 2026",
+        targetDate: new Date("2026-06-12"),
+        location: "Marina Euforia Pisz",
+        price: "1000",
+        spots: 0,
+        totalSpots: 6,
+        yacht: "Jacht Phila 880",
+        description:
+            "Rejs po Mazurach to odkrywanie piekna tego zakatka dla osob ktore chca przezyc niezapomniana przygode zeglarska.",
     },
     {
         title: "Grecja — Rejs 1",
