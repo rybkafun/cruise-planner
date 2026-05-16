@@ -26,12 +26,12 @@ export const cruises = [
         date: "15.08 – 22.08.2026",
         targetDate: new Date("2026-08-15"),
         location: "Marina Kalamaki, Ateny",
-        price: "750",
+        price: "700",
         spots: 8,
         totalSpots: 30,
-        yacht: "Cyclades 51",
+        yacht: "Bavaria Cruiser 51",
         description:
-            "Flotylla trzech jachtów razem, wspólne żeglowanie, kotwiczenie zwiedzanie portowych miasteczek i ucztowanie, fun na maxa. Trasa zalezy od warunkow pogodowych.",
+            "Dwa jachty razem, wspólne żeglowanie, kotwiczenie zwiedzanie portowych miasteczek i ucztowanie, fun na maxa. Trasa zalezy od warunkow pogodowych.",
     },
     {
         title: "Grecja — Rejs 2",
@@ -40,9 +40,9 @@ export const cruises = [
         date: "22.08 – 29.08.2026",
         targetDate: new Date("2026-08-22"),
         location: "Marina Kalamaki → Ateny",
-        price: "750",
-        spots: 11,
-        totalSpots: 30,
+        price: "700",
+        spots: 0,
+        totalSpots: 22,
         yacht: "Cyklades 51",
         description:
             "Flotylla trzech jachtów razem, wspólne żeglowanie kotwiczenie zwiedzanie portowych miasteczek i ucztowanie, fun na maxa. Trasa zalezy od warunkow pogodowych.",
