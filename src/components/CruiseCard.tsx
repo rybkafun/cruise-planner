@@ -140,6 +140,18 @@ const CruiseCard = ({
             <div className="mt-6 w-full inline-flex items-center justify-center px-6 py-3.5 bg-muted text-muted-foreground font-body text-sm font-semibold rounded-xl text-center">
               Zapisy wkrótce
             </div>
+          ) : spotsLeft === 0 && (title.includes("Grecja") || title.includes("Mazurach")) ? (
+            <>
+              {/* Zmiana 26.05.2026: Jeżeli rejs w Grecji lub na Mazurach nie ma już wolnych miejsc, przekieruj do zapisów na listę rezerwową zamiast do galerii */}
+              <Link
+              to={`/zapisy/${title.toLowerCase().replace(/\s+/g, '-')}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-6 w-full inline-flex items-center justify-center px-6 py-3.5 bg-secondary text-secondary-foreground font-body font-semibold rounded-xl shadow-ocean hover:shadow-card-hover hover:scale-[1.02] transition-all duration-300 text-sm"
+            >
+              Zapisz się na listę rezerwową ⏳
+            </Link>
+            </>
           ) : spotsLeft === 0 && title.includes("Kanaryjskie") ? (
             <Link
               to={`/galeria/wyspy-kanaryjskie`}

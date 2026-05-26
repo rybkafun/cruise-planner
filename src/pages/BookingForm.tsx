@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Ship, ArrowLeft, Send } from "lucide-react";
+import { Ship, ArrowLeft, Send, Sailboat } from "lucide-react";
 import { toast } from "sonner";
 import { cruises } from "../lib/cruises";
 import heroImage from "@/assets/hero-sailing.jpg";
@@ -36,12 +36,21 @@ const BookingForm = () => {
 
         try {
             const formData = new FormData(form);
+
+            // Zmiana 26.05.2026: Automatyczne oznaczanie rekordów dla rejsów w pełni zarezerwowanych 
+            // (aktualnie "Grecja" oraz "Mazurach") jako "[Lista Rezerwowa]" w wiadomości przesłanej do bazy (Airtable/system docelowy).
+            const isReserveList = cruise?.title.includes("Grecja") || cruise?.title.includes("Mazurach") ? true : false;
+            let finalMessage = String(formData.get("message") ?? "").trim();
+            if (isReserveList) {
+                finalMessage = `[Lista Rezerwowa]\n${finalMessage}`.trim();
+            }
+
             const payload = {
                 name: String(formData.get("name") ?? "").trim(),
                 email: String(formData.get("email") ?? "").trim(),
                 phone: String(formData.get("phone") ?? "").trim(),
                 captain: String(formData.get("captain") ?? "").trim(),
-                message: String(formData.get("message") ?? "").trim(),
+                message: finalMessage,
                 cruise: displayTitle,
             };
 
@@ -99,7 +108,7 @@ const BookingForm = () => {
                         to="/"
                         className="group flex items-center gap-2 text-2xl font-display font-bold text-primary tracking-tight"
                     >
-                        <Ship className="w-8 h-8 group-hover:rotate-12 transition-transform duration-300" />
+                        <Sailboat className="w-8 h-8 group-hover:rotate-12 transition-transform duration-300" />
                         <span>Rybka.fun</span>
                     </Link>
                     <Link

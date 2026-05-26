@@ -28,7 +28,9 @@ export const cruises = [
         targetDate: new Date("2026-06-12"),
         location: "Marina Euforia Pisz",
         price: "1000",
-        spots: 0,
+        // Zmiana 26.05.2026: Rejs na Mazurach wyprzedany. 
+        // Włączono zapisy na listę rezerwową.
+        spots: 6,
         totalSpots: 6,
         yacht: "Jacht Phila 880",
         description:
@@ -42,7 +44,9 @@ export const cruises = [
         targetDate: new Date("2026-08-15"),
         location: "Marina Kalamaki, Ateny",
         price: "700",
-        spots: 19,
+        // Zmiana 26.05.2026: Zmiana ilości wolnych miejsc - rejs w pełni zarezerwowany,
+        // zapisy przyjmowane są teraz wyłącznie na listę rezerwową.
+        spots: 20,
         totalSpots: 20,
         yacht: "Bavaria Cruiser 51",
         description:
@@ -56,7 +60,9 @@ export const cruises = [
         targetDate: new Date("2026-08-22"),
         location: "Marina Kalamaki → Ateny",
         price: "700",
-        spots: 21,
+        // Zmiana 26.05.2026: Zmiana ilości wolnych miejsc - rejs w pełni zarezerwowany,
+        // zapisy przyjmowane są teraz wyłącznie na listę rezerwową.
+        spots: 22,
         totalSpots: 22,
         yacht: "Cyklades 51",
         description:
