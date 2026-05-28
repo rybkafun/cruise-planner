@@ -24,8 +24,8 @@ export const cruises = [
         title: "Rejs Na Mazurach",
         subtitle: "Rejs Wiosenny",
         image: mazuryImg,
-        date: "12-14 czerwiec lub 19-21 czerwiec 2026",
-        targetDate: new Date("2026-06-12"),
+        date: "09.07 - 12.07.2026",
+        targetDate: new Date("2026-07-09"),
         location: "Marina Euforia Pisz",
         price: "1000",
         // Zmiana 26.05.2026: Rejs na Mazurach wyprzedany. 
