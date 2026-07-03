@@ -66,12 +66,10 @@ const CruiseCard = ({
               ? "bg-muted text-muted-foreground"
               : spotsLeft === 0
                 ? "bg-muted text-muted-foreground"
-                : urgency
-                  ? "bg-sunset text-primary-foreground animate-pulse"
-                  : "bg-accent text-accent-foreground"
+                : "bg-green-500 text-white"
               }`}
           >
-            {spotsLeft === totalSpots && ["Karaiby", "Tajlandia", "Włochy"].some(k => title.includes(k)) ? "W planowaniu" : spotsLeft === 0 ? "Brak miejsc" : urgency ? `Ostatnie ${spotsLeft} miejsca!` : `${spotsLeft} wolnych miejsc`}
+            {spotsLeft === totalSpots && ["Karaiby", "Tajlandia", "Włochy"].some(k => title.includes(k)) ? "W planowaniu" : spotsLeft === 0 ? "Brak miejsc" : "Wolne Miejsca"}
           </span>
         </div>
       </div>
@@ -171,18 +169,18 @@ const CruiseCard = ({
               to={`/zapisy/${title.toLowerCase().replace(/\s+/g, '-')}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-6 w-full inline-flex items-center justify-center px-6 py-3.5 bg-primary text-primary-foreground font-body font-semibold rounded-xl shadow-ocean hover:shadow-card-hover hover:scale-[1.02] transition-all duration-300"
+              className="mt-6 w-full inline-flex items-center justify-center px-6 py-3.5 bg-green-500 text-white font-body font-semibold rounded-xl shadow-ocean hover:shadow-card-hover hover:bg-green-600 hover:scale-[1.02] transition-all duration-300"
             >
-              Zapisz się na rejs ⛵
+              Zapisz się ⛵
             </Link>
           ) : (
             <a
               href="https://rybka.fun/zgloszenie/"
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-6 w-full inline-flex items-center justify-center px-6 py-3.5 bg-primary text-primary-foreground font-body font-semibold rounded-xl shadow-ocean hover:shadow-card-hover hover:scale-[1.02] transition-all duration-300"
+              className="mt-6 w-full inline-flex items-center justify-center px-6 py-3.5 bg-green-500 text-white font-body font-semibold rounded-xl shadow-ocean hover:shadow-card-hover hover:bg-green-600 hover:scale-[1.02] transition-all duration-300"
             >
-              Zapisz się na rejs ⛵
+              Zapisz się ⛵
             </a>
           )}
         </div>

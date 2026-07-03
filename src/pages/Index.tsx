@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import Hero from "@/components/Hero";
 import CruiseCard from "@/components/CruiseCard";
 import WhyUs from "@/components/WhyUs";
@@ -8,8 +9,24 @@ import Footer from "@/components/Footer";
 
 import { cruises } from "@/lib/cruises";
 
-
 const Index = () => {
+  const [spotsData, setSpotsData] = useState<Record<string, number>>({});
+
+  useEffect(() => {
+    const fetchSpots = async () => {
+      try {
+        const res = await fetch("/.netlify/functions/get-all-cruise-spots");
+        if (res.ok) {
+          const data = await res.json();
+          setSpotsData(data);
+        }
+      } catch (err) {
+        console.error("Failed to fetch spots data", err);
+      }
+    };
+    fetchSpots();
+  }, []);
+
   return (
     <main className="min-h-screen">
       <Hero />
@@ -27,9 +44,10 @@ const Index = () => {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {cruises.map((cruise, i) => (
-              <CruiseCard key={i} {...cruise} index={i} />
-            ))}
+            {cruises.map((cruise, i) => {
+              const currentSpots = spotsData[cruise.title] !== undefined ? spotsData[cruise.title] : cruise.spots;
+              return <CruiseCard key={i} {...cruise} spots={currentSpots} index={i} />;
+            })}
           </div>
         </div>
       </section>
