@@ -64,12 +64,12 @@ const CruiseCard = ({
           <span
             className={`inline-block text-xs font-body font-bold uppercase tracking-wider px-3 py-1.5 rounded-full ${spotsLeft === totalSpots && ["Karaiby", "Tajlandia", "Włochy"].some(k => title.includes(k))
               ? "bg-muted text-muted-foreground"
-              : spotsLeft === 0
+              : spotsLeft <= 0
                 ? "bg-muted text-muted-foreground"
                 : "bg-green-500 text-white"
               }`}
           >
-            {spotsLeft === totalSpots && ["Karaiby", "Tajlandia", "Włochy"].some(k => title.includes(k)) ? "W planowaniu" : spotsLeft === 0 ? "Brak miejsc" : "Wolne Miejsca"}
+            {spotsLeft === totalSpots && ["Karaiby", "Tajlandia", "Włochy"].some(k => title.includes(k)) ? "W planowaniu" : spotsLeft <= 0 ? "Brak miejsc" : "Wolne Miejsca"}
           </span>
         </div>
       </div>
@@ -138,7 +138,7 @@ const CruiseCard = ({
             <div className="mt-6 w-full inline-flex items-center justify-center px-6 py-3.5 bg-muted text-muted-foreground font-body text-sm font-semibold rounded-xl text-center">
               Zapisy wkrótce
             </div>
-          ) : spotsLeft === 0 && (title.includes("Grecja") || title.includes("Mazurach")) ? (
+          ) : spotsLeft <= 0 && (title.includes("Grecja") || title.includes("Mazurach")) ? (
             <>
               {/* Zmiana 26.05.2026: Jeżeli rejs w Grecji lub na Mazurach nie ma już wolnych miejsc, przekieruj do zapisów na listę rezerwową zamiast do galerii */}
               <Link
@@ -150,14 +150,14 @@ const CruiseCard = ({
               Zapisz się na listę rezerwową ⏳
             </Link>
             </>
-          ) : spotsLeft === 0 && title.includes("Kanaryjskie") ? (
+          ) : spotsLeft <= 0 && title.includes("Kanaryjskie") ? (
             <Link
               to={`/galeria/wyspy-kanaryjskie`}
               className="mt-6 w-full inline-flex items-center justify-center px-6 py-3.5 bg-primary text-primary-foreground font-body font-semibold rounded-xl shadow-ocean hover:shadow-card-hover hover:scale-[1.02] transition-all duration-300 text-sm"
             >
               Zobacz jak było
             </Link>
-          ) : spotsLeft === 0 ? (
+          ) : spotsLeft <= 0 ? (
             <Link
               to={`/galeria/${title.toLowerCase().replace(/\s+/g, '-')}`}
               className="mt-6 w-full inline-flex items-center justify-center px-6 py-3.5 bg-muted text-muted-foreground font-body text-sm font-semibold rounded-xl text-center hover:bg-secondary hover:text-secondary-foreground transition-all duration-300"
