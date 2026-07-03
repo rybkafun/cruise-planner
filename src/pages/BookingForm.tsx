@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Ship, ArrowLeft, Send, Sailboat } from "lucide-react";
@@ -20,8 +20,26 @@ const BookingForm = () => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [showFullModal, setShowFullModal] = useState(false);
     const [fullCaptainName, setFullCaptainName] = useState("");
+    const [spotsData, setSpotsData] = useState<Record<string, number> | null>(null);
+
+    useEffect(() => {
+        const fetchSpots = async () => {
+            try {
+                const res = await fetch("/.netlify/functions/get-all-cruise-spots");
+                if (res.ok) {
+                    const data = await res.json();
+                    setSpotsData(data);
+                }
+            } catch (err) {
+                console.error("Failed to fetch spots data", err);
+            }
+        };
+        fetchSpots();
+    }, []);
 
     const cruise = id ? cruises.find(c => c.title.toLowerCase().replace(/\s+/g, '-') === id) : null;
+    const currentSpots = (cruise && spotsData && spotsData[cruise.title] !== undefined) ? spotsData[cruise.title] : cruise?.spots || 0;
+    const isFull = cruise && currentSpots >= cruise.totalSpots;
 
     // Zdekodujmy lub stwórzmy ładną nazwę na podstawie ID
     const displayTitle = cruise ? cruise.title : id
@@ -37,9 +55,7 @@ const BookingForm = () => {
         try {
             const formData = new FormData(form);
 
-            // Zmiana 26.05.2026: Automatyczne oznaczanie rekordów dla rejsów w pełni zarezerwowanych 
-            // (aktualnie "Grecja" oraz "Mazurach") jako "[Lista Rezerwowa]" w wiadomości przesłanej do bazy (Airtable/system docelowy).
-            const isReserveList = cruise?.title.includes("Grecja") || cruise?.title.includes("Mazurach") ? true : false;
+            const isReserveList = isFull;
             let finalMessage = String(formData.get("message") ?? "").trim();
             if (isReserveList) {
                 finalMessage = `[Lista Rezerwowa]\n${finalMessage}`.trim();
@@ -192,6 +208,18 @@ const BookingForm = () => {
                             >
                                 {cruise?.title === "Rejs Na Mazurach" ? (
                                     <option value="Grzegorz">Grzegorz</option>
+                                ) : cruise?.title === "Grecja — Rejs 1" ? (
+                                    <>
+                                        <option value="" disabled hidden>Wybierz z listy...</option>
+                                        <option value="Michał">Michał</option>
+                                        <option value="Wojtek">Wojtek</option>
+                                    </>
+                                ) : cruise?.title === "Grecja — Rejs 2" ? (
+                                    <>
+                                        <option value="" disabled hidden>Wybierz z listy...</option>
+                                        <option value="Michał">Michał</option>
+                                        <option value="Grzesiek">Grzesiek</option>
+                                    </>
                                 ) : (
                                     <>
                                         <option value="" disabled hidden>Wybierz z listy...</option>

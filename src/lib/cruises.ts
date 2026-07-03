@@ -63,7 +63,7 @@ export const cruises = [
         // Zmiana 26.05.2026: Zmiana ilości wolnych miejsc - rejs w pełni zarezerwowany,
         // zapisy przyjmowane są teraz wyłącznie na listę rezerwową.
         spots: 22,
-        totalSpots: 22,
+        totalSpots: 20,
         yacht: "Cyklades 51",
         description:
             "Flotylla trzech jachtów razem, wspólne żeglowanie kotwiczenie zwiedzanie portowych miasteczek i ucztowanie, fun na maxa. Trasa zalezy od warunkow pogodowych.",
