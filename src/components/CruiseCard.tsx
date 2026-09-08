@@ -35,6 +35,8 @@ const CruiseCard = ({
   const spotsLeft = totalSpots - spots;
   const urgency = spotsLeft <= 3;
 
+  const isCompleted = subtitle.toLowerCase().includes('zakończony') || description.toLowerCase().includes('zakończony');
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 40 }}
@@ -60,18 +62,20 @@ const CruiseCard = ({
         </div>
 
         {/* Spots badge */}
-        <div className="absolute top-4 right-4">
-          <span
-            className={`inline-block text-xs font-body font-bold uppercase tracking-wider px-3 py-1.5 rounded-full ${spotsLeft === totalSpots && ["Karaiby", "Tajlandia", "Włochy"].some(k => title.includes(k))
-              ? "bg-muted text-muted-foreground"
-              : spotsLeft <= 0
+        {!isCompleted && (
+          <div className="absolute top-4 right-4">
+            <span
+              className={`inline-block text-xs font-body font-bold uppercase tracking-wider px-3 py-1.5 rounded-full ${spotsLeft === totalSpots && ["Karaiby", "Tajlandia", "Włochy"].some(k => title.includes(k))
                 ? "bg-muted text-muted-foreground"
-                : "bg-green-500 text-white"
-              }`}
-          >
-            {spotsLeft === totalSpots && ["Karaiby", "Tajlandia", "Włochy"].some(k => title.includes(k)) ? "W planowaniu" : spotsLeft <= 0 ? "Brak miejsc" : "Wolne Miejsca"}
-          </span>
-        </div>
+                : spotsLeft <= 0
+                  ? "bg-muted text-muted-foreground"
+                  : "bg-green-500 text-white"
+                }`}
+            >
+              {spotsLeft === totalSpots && ["Karaiby", "Tajlandia", "Włochy"].some(k => title.includes(k)) ? "W planowaniu" : spotsLeft <= 0 ? "Brak miejsc" : "Wolne Miejsca"}
+            </span>
+          </div>
+        )}
       </div>
 
       {/* Content */}
@@ -134,22 +138,25 @@ const CruiseCard = ({
             </div>
           </div>
 
-          {spotsLeft === totalSpots && ["Karaiby", "Tajlandia", "Włochy"].some(k => title.includes(k)) ? (
+          {title === "Grecja — Rejs 1" ? (
+            <Link
+              to="/galeria/grecja-1"
+              className="mt-6 w-full inline-flex items-center justify-center px-6 py-3.5 bg-blue-500 text-white font-body text-sm font-semibold rounded-xl text-center hover:bg-blue-600 transition-colors"
+            >
+              Zobacz jak było
+            </Link>
+          ) : title.includes("Grecja") ? (
+            <div className="mt-6 w-full inline-flex items-center justify-center px-6 py-3.5 bg-blue-500 text-white font-body text-sm font-semibold rounded-xl text-center cursor-default">
+              Zobacz jak było
+            </div>
+          ) : title.includes("Mazurach") ? (
+            <div className="mt-6 w-full inline-flex items-center justify-center px-6 py-3.5 bg-muted text-muted-foreground font-body text-sm font-semibold rounded-xl text-center cursor-default">
+              Zapisy wkrótce
+            </div>
+          ) : spotsLeft === totalSpots && ["Karaiby", "Tajlandia", "Włochy"].some(k => title.includes(k)) ? (
             <div className="mt-6 w-full inline-flex items-center justify-center px-6 py-3.5 bg-muted text-muted-foreground font-body text-sm font-semibold rounded-xl text-center">
               Zapisy wkrótce
             </div>
-          ) : spotsLeft <= 0 && (title.includes("Grecja") || title.includes("Mazurach")) ? (
-            <>
-              {/* Zmiana 26.05.2026: Jeżeli rejs w Grecji lub na Mazurach nie ma już wolnych miejsc, przekieruj do zapisów na listę rezerwową zamiast do galerii */}
-              <Link
-              to={`/zapisy/${title.toLowerCase().replace(/\s+/g, '-')}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-6 w-full inline-flex items-center justify-center px-6 py-3.5 bg-secondary text-secondary-foreground font-body font-semibold rounded-xl shadow-ocean hover:shadow-card-hover hover:scale-[1.02] transition-all duration-300 text-sm"
-            >
-              Zapisz się na listę rezerwową ⏳
-            </Link>
-            </>
           ) : spotsLeft <= 0 && title.includes("Kanaryjskie") ? (
             <Link
               to={`/galeria/wyspy-kanaryjskie`}
@@ -163,15 +170,6 @@ const CruiseCard = ({
               className="mt-6 w-full inline-flex items-center justify-center px-6 py-3.5 bg-muted text-muted-foreground font-body text-sm font-semibold rounded-xl text-center hover:bg-secondary hover:text-secondary-foreground transition-all duration-300"
             >
               Wejdź do galerii
-            </Link>
-          ) : title.includes("Grecja") || title.includes("Mazurach") ? (
-            <Link
-              to={`/zapisy/${title.toLowerCase().replace(/\s+/g, '-')}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-6 w-full inline-flex items-center justify-center px-6 py-3.5 bg-green-500 text-white font-body font-semibold rounded-xl shadow-ocean hover:shadow-card-hover hover:bg-green-600 hover:scale-[1.02] transition-all duration-300"
-            >
-              Zapisz się ⛵
             </Link>
           ) : (
             <a

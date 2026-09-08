@@ -3,13 +3,17 @@ import { Link, useParams } from "react-router-dom";
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { kanaryImages } from "@/lib/kanaryImages";
+import { grecjaImages } from "@/lib/grecjaImages";
 
 const Gallery = () => {
     const { id } = useParams();
-    const cruiseName = id === "wyspy-kanaryjskie" ? "Wyspy Kanaryjskie" : "Rejs";
+    
+    // Choose cruise name
+    const cruiseName = id === "wyspy-kanaryjskie" ? "Wyspy Kanaryjskie" : id === "grecja-1" ? "Grecja" : "Rejs";
 
-    // Choose images based on the cruise. For now all load kanaryImages
-    const images = id === "wyspy-kanaryjskie" ? kanaryImages : kanaryImages;
+    // Choose images based on the cruise
+    const images = id === "wyspy-kanaryjskie" ? kanaryImages : id === "grecja-1" ? grecjaImages : kanaryImages;
+    const galleryFolder = id === "wyspy-kanaryjskie" ? "kanary" : id === "grecja-1" ? "grecja" : "kanary";
 
     const [isOpen, setIsOpen] = useState(false);
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -92,7 +96,7 @@ const Gallery = () => {
                             className="aspect-square bg-muted rounded-xl cursor-pointer overflow-hidden border border-border hover:shadow-lg transition-all"
                         >
                             <img
-                                src={`/gallery/kanary/thumb/${img}`}
+                                src={`/gallery/${galleryFolder}/thumb/${img}`}
                                 alt={`Gallery image ${i + 1}`}
                                 loading="lazy"
                                 className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
@@ -159,7 +163,7 @@ const Gallery = () => {
                                 initial={{ opacity: 0, scale: 0.95 }}
                                 animate={{ opacity: 1, scale: 1 }}
                                 transition={{ duration: 0.3 }}
-                                src={`/gallery/kanary/${images[currentIndex]}`}
+                                src={`/gallery/${galleryFolder}/${images[currentIndex]}`}
                                 alt={`Gallery full size ${currentIndex + 1}`}
                                 className="max-w-full max-h-full object-contain rounded-sm shadow-2xl"
                                 onClick={(e) => e.stopPropagation()}
