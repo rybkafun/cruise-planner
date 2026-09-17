@@ -8,18 +8,18 @@ import sicilyImg from "@/assets/aeolian-sailing.png";
 
 export const cruises = [
     {
-        title: "Włochy – Sycylia",
-        subtitle: "Dolce Vita na Morzu",
-        image: sicilyImg,
-        date: "24.10 – 31.10.2026",
-        targetDate: new Date("2026-10-24"),
-        location: "Palermo lub Portorosana Sycylii",
-        price: "600",
-        spots: 0,
-        totalSpots: 10,
-        yacht: "Beneteau Oceanis 48",
+        title: "Chorwacja słoneczna kraina",
+        subtitle: "Rejs jesienny",
+        image: croatiaImg,
+        date: "10.10 – 17.10.2026",
+        targetDate: new Date("2026-10-10"),
+        location: "Zadar / Sukosan, Chorwacja",
+        price: "350",
+        spots: 3,
+        totalSpots: 7,
+        yacht: "Hanse 418",
         description:
-            "Poczuj klimat Sycyli, bliskosci Etny i pulsu Palermo. Odwiedzisz róznorodne porty wyspy. Zaplanuj z nami rejs na Wyspy Liparyjskie. Wyśmienita kuchnia i śródziemnomorski luz.",
+            "Zapraszamy do odwiedzenia dwóch pięknych parków narodowych Chorwacji: parku Kornati – krainy 1001 wysp oraz parku Krka z zachwycającymi wodospadami Krka. Idealna żegluga jesienną porą.",
     },
     {
         title: "Wyspy Kanaryjskie",
