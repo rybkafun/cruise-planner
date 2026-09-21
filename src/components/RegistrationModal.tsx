@@ -40,9 +40,10 @@ const formSchema = z.object({
 
 interface RegistrationModalProps {
     children: React.ReactNode;
+    defaultCruise?: string;
 }
 
-export const RegistrationModal = ({ children }: RegistrationModalProps) => {
+export const RegistrationModal = ({ children, defaultCruise = "" }: RegistrationModalProps) => {
     const [isOpen, setIsOpen] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [showFullModal, setShowFullModal] = useState(false);
@@ -55,7 +56,7 @@ export const RegistrationModal = ({ children }: RegistrationModalProps) => {
             name: "",
             email: "",
             phone: "",
-            cruise: "",
+            cruise: defaultCruise,
         },
     });
 

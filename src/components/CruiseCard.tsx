@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import CountdownTimer from "./CountdownTimer";
 import { MapPin, Calendar, Users, Ship, Euro } from "lucide-react";
+import { RegistrationModal } from "./RegistrationModal";
 
 interface CruiseCardProps {
   title: string;
@@ -171,6 +172,14 @@ const CruiseCard = ({
             >
               Wejdź do galerii
             </Link>
+          ) : title.includes("Chorwacja") ? (
+            <div className="mt-6 w-full">
+              <RegistrationModal defaultCruise={title}>
+                <button className="w-full inline-flex items-center justify-center px-6 py-3.5 bg-green-500 text-white font-body font-semibold rounded-xl shadow-ocean hover:shadow-card-hover hover:bg-green-600 hover:scale-[1.02] transition-all duration-300">
+                  Zapisz się ⛵
+                </button>
+              </RegistrationModal>
+            </div>
           ) : (
             <a
               href="https://rybka.fun/zgloszenie/"
