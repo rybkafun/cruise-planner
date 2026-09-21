@@ -20,6 +20,7 @@ import {
     FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import {
     Select,
     SelectContent,
@@ -36,14 +37,16 @@ const formSchema = z.object({
     email: z.string().email("Niepoprawny adres email"),
     phone: z.string().min(9, "Numer telefonu musi mieć co najmniej 9 cyfr"),
     cruise: z.string().min(1, "Proszę wybrać rejs"),
+    message: z.string().optional(),
 });
 
 interface RegistrationModalProps {
     children: React.ReactNode;
     defaultCruise?: string;
+    onSuccess?: () => void;
 }
 
-export const RegistrationModal = ({ children, defaultCruise = "" }: RegistrationModalProps) => {
+export const RegistrationModal = ({ children, defaultCruise = "", onSuccess }: RegistrationModalProps) => {
     const [isOpen, setIsOpen] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [showFullModal, setShowFullModal] = useState(false);
@@ -57,6 +60,7 @@ export const RegistrationModal = ({ children, defaultCruise = "" }: Registration
             email: "",
             phone: "",
             cruise: defaultCruise,
+            message: "",
         },
     });
 
@@ -71,11 +75,12 @@ export const RegistrationModal = ({ children, defaultCruise = "" }: Registration
                 body: JSON.stringify(values),
             });
 
+            const responseData = await response.json().catch(() => ({}));
+
             if (!response.ok) {
                 if (response.status === 409) {
-                    const errorData = await response.json().catch(() => ({}));
-                    if (errorData.error === "CAPTAIN_FULL") {
-                        setFullCaptainName(errorData.captain || "Wybrany");
+                    if (responseData.error === "CAPTAIN_FULL") {
+                        setFullCaptainName(responseData.captain || "Wybrany");
                         setShowFullModal(true);
                         setIsSubmitting(false);
                         return;
@@ -84,9 +89,14 @@ export const RegistrationModal = ({ children, defaultCruise = "" }: Registration
                 throw new Error("Błąd podczas wysyłania zgłoszenia");
             }
 
-            toast.success("Zgłoszenie zostało wysłane pomyślnie!");
+            if (responseData.isReserve) {
+                toast.success("Niestety skończyły się nam miejsca na ten rejs, zapiszemy Cię na listę rezerwową", { duration: 6000 });
+            } else {
+                toast.success("Dziękujemy za zgłoszenie, pozostajemy w kontakcie!");
+            }
             setIsOpen(false);
             form.reset();
+            onSuccess?.();
         } catch (error) {
             console.error("Submission error:", error);
             toast.error("Wystąpił błąd. Spróbuj ponownie później.");
@@ -168,6 +178,19 @@ export const RegistrationModal = ({ children, defaultCruise = "" }: Registration
                                                 ))}
                                             </SelectContent>
                                         </Select>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="message"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Poznajmy się: (opcjonalnie)</FormLabel>
+                                        <FormControl>
+                                            <Textarea placeholder="Napisz coś o sobie, dlaczego chcesz popłynąć lub czy masz doświadczenie..." className="resize-none" rows={3} {...field} />
+                                        </FormControl>
                                         <FormMessage />
                                     </FormItem>
                                 )}

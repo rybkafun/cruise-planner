@@ -51,16 +51,11 @@ export const handler: Handler = async (event) => {
             }
         };
 
-        addFieldIfPresent("ImieNazwisko", body.name);
-        addFieldIfPresent("Email", body.email);
-        addFieldIfPresent("Telefon", body.phone);
-        addFieldIfPresent("Rejs", body.cruise);
-        addFieldIfPresent("Kapitan", body.captain);
-        addFieldIfPresent("OSobie", body.message);
+        let isReserve = false;
 
-        // Check current captain's reservations count for this specific cruise
-        if (body.captain && body.cruise) {
-            const formula = `AND({Kapitan}='${body.captain}', {Rejs}='${body.cruise}')`;
+        // Check total reservations count for this specific cruise
+        if (body.cruise) {
+            const formula = `{Rejs}='${body.cruise}'`;
             const checkUrl = new URL(`https://api.airtable.com/v0/${airtableBaseId}/${encodeURIComponent(airtableTableId)}`);
             checkUrl.searchParams.append("filterByFormula", formula);
 
@@ -73,15 +68,8 @@ export const handler: Handler = async (event) => {
 
             if (checkResponse.ok) {
                 const checkData = await checkResponse.json();
-                if (checkData.records && checkData.records.length >= 10) {
-                    return {
-                        statusCode: 409,
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({
-                            error: "CAPTAIN_FULL",
-                            captain: body.captain
-                        })
-                    };
+                if (checkData.records && checkData.records.length >= 8) {
+                    isReserve = true;
                 }
             } else {
                 const errorText = await checkResponse.text();
@@ -98,6 +86,19 @@ export const handler: Handler = async (event) => {
                 // Otherwise proceed if it's a flaky network issue
             }
         }
+
+        if (isReserve) {
+            body.message = body.message ? `[LISTA REZERWOWA] ${body.message}` : `[LISTA REZERWOWA]`;
+        }
+
+        addFieldIfPresent("ImieNazwisko", body.name);
+        addFieldIfPresent("Email", body.email);
+        addFieldIfPresent("Telefon", body.phone);
+        addFieldIfPresent("Rejs", body.cruise);
+        addFieldIfPresent("Kapitan", body.captain);
+        addFieldIfPresent("OSobie", body.message);
+
+
 
         const response = await fetch(`https://api.airtable.com/v0/${airtableBaseId}/${encodeURIComponent(airtableTableId)}`, {
             method: "POST",
@@ -119,7 +120,7 @@ export const handler: Handler = async (event) => {
         return {
             statusCode: 200,
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ message: "Success" })
+            body: JSON.stringify({ message: "Success", isReserve })
         };
     } catch (error) {
         console.error("Error submitting registration to Airtable:", error);

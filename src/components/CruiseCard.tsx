@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import CountdownTimer from "./CountdownTimer";
@@ -33,7 +34,8 @@ const CruiseCard = ({
   description,
   index,
 }: CruiseCardProps) => {
-  const spotsLeft = totalSpots - spots;
+  const [localSpots, setLocalSpots] = useState(spots);
+  const spotsLeft = totalSpots - localSpots;
   const urgency = spotsLeft <= 3;
 
   const isCompleted = subtitle.toLowerCase().includes('zakończony') || description.toLowerCase().includes('zakończony');
@@ -126,12 +128,12 @@ const CruiseCard = ({
           <div className="mt-5">
             <div className="flex justify-between text-xs text-muted-foreground font-body mb-1">
               <span>Zajęte miejsca</span>
-              <span>{spots}/{totalSpots}</span>
+              <span>{localSpots}/{totalSpots}</span>
             </div>
             <div className="h-2 bg-muted rounded-full overflow-hidden">
               <motion.div
                 initial={{ width: 0 }}
-                whileInView={{ width: `${(spots / totalSpots) * 100}%` }}
+                whileInView={{ width: `${(localSpots / totalSpots) * 100}%` }}
                 viewport={{ once: true }}
                 transition={{ duration: 1.2, ease: "easeOut" }}
                 className={`h-full rounded-full ${urgency ? "bg-sunset" : "bg-primary"}`}
@@ -174,7 +176,7 @@ const CruiseCard = ({
             </Link>
           ) : title.includes("Chorwacja") ? (
             <div className="mt-6 w-full">
-              <RegistrationModal defaultCruise={title}>
+              <RegistrationModal defaultCruise={title} onSuccess={() => setLocalSpots(prev => prev + 1)}>
                 <button className="w-full inline-flex items-center justify-center px-6 py-3.5 bg-green-500 text-white font-body font-semibold rounded-xl shadow-ocean hover:shadow-card-hover hover:bg-green-600 hover:scale-[1.02] transition-all duration-300">
                   Zapisz się ⛵
                 </button>
