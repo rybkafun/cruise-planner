@@ -16,8 +16,8 @@ export const cruises = [
         location: "Zadar / Sukosan, Chorwacja",
         price: "350",
         spots: 3,
-        totalSpots: 7,
-        yacht: "Hanse 418",
+        totalSpots: 8,
+        yacht: "Hanse 458",
         description:
             "Zapraszamy do odwiedzenia dwóch pięknych parków narodowych Chorwacji: parku Kornati – krainy 1001 wysp oraz parku Krka z zachwycającymi wodospadami Krka. Idealna żegluga jesienną porą.",
     },
