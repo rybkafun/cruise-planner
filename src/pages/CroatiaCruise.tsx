@@ -56,7 +56,7 @@ const CroatiaCruise = () => {
           <img
             src={kornatiImage}
             alt="Park Narodowy Kornati - lazurowy Adriatyk i archipelag wysp"
-            className="w-full h-full object-cover scale-105 animate-pulse duration-[10000ms]"
+            className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-background via-black/40 to-black/30" />
         </div>
@@ -356,41 +356,21 @@ const CroatiaCruise = () => {
 
             <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
               <RegistrationModal defaultCruise={cruiseTitle}>
-                <button className="w-full sm:w-auto px-9 py-4 bg-green-500 hover:bg-green-600 text-white font-body font-bold text-lg rounded-full shadow-lg hover:shadow-green-500/40 hover:scale-105 transition-all duration-300">
+                <button className="w-full sm:w-auto px-10 py-4 bg-green-500 hover:bg-green-600 text-white font-body font-bold text-lg rounded-full shadow-lg hover:shadow-green-500/40 hover:scale-105 transition-all duration-300">
                   Zapraszamy na Rejs →
                 </button>
               </RegistrationModal>
             </div>
 
-            {/* Direct Contact Bar */}
-            <div className="pt-8 border-t border-white/20 mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4 text-left">
-              <a
-                href="mailto:windrybka@gmail.com"
-                className="flex items-center gap-3 p-4 bg-white/10 hover:bg-white/15 rounded-2xl backdrop-blur-sm transition-all"
-              >
-                <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center shrink-0">
-                  <Mail size={20} />
-                </div>
-                <div>
-                  <span className="text-xs uppercase text-white/70 block">E-mail</span>
-                  <span className="font-semibold text-white text-sm sm:text-base">windrybka@gmail.com</span>
-                </div>
-              </a>
-
-              <a
-                href="https://wa.me/48722305113"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-3 p-4 bg-white/10 hover:bg-white/15 rounded-2xl backdrop-blur-sm transition-all"
-              >
-                <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center shrink-0">
-                  <MessageCircle size={20} />
-                </div>
-                <div>
-                  <span className="text-xs uppercase text-white/70 block">WhatsApp / tel.</span>
-                  <span className="font-semibold text-white text-sm sm:text-base">722 305 113</span>
-                </div>
-              </a>
+            <div className="pt-6 border-t border-white/20 mt-6 flex flex-wrap items-center justify-center gap-6 text-white/80 text-sm">
+              <span className="flex items-center gap-2">
+                <CheckCircle2 size={16} className="text-green-300" />
+                Zapisy wyłącznie przez formularz online
+              </span>
+              <span className="flex items-center gap-2">
+                <CheckCircle2 size={16} className="text-green-300" />
+                Szybkie potwierdzenie rezerwacji
+              </span>
             </div>
           </div>
         </section>
