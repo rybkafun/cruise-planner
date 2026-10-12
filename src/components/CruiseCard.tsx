@@ -18,6 +18,7 @@ interface CruiseCardProps {
   yacht: string;
   description: string;
   index: number;
+  detailsLink?: string;
 }
 
 const CruiseCard = ({
@@ -33,6 +34,7 @@ const CruiseCard = ({
   yacht,
   description,
   index,
+  detailsLink,
 }: CruiseCardProps) => {
   const [localSpots, setLocalSpots] = useState(spots);
   const spotsLeft = totalSpots - localSpots;
@@ -175,12 +177,20 @@ const CruiseCard = ({
               Wejdź do galerii
             </Link>
           ) : title.includes("Chorwacja") ? (
-            <div className="mt-6 w-full">
-              <RegistrationModal defaultCruise={title} onSuccess={() => setLocalSpots(prev => prev + 1)}>
-                <button className="w-full inline-flex items-center justify-center px-6 py-3.5 bg-green-500 text-white font-body font-semibold rounded-xl shadow-ocean hover:shadow-card-hover hover:bg-green-600 hover:scale-[1.02] transition-all duration-300">
-                  Zapisz się ⛵
-                </button>
-              </RegistrationModal>
+            <div className="mt-6 flex flex-col sm:flex-row gap-2.5 w-full">
+              <Link
+                to={detailsLink || "/rejsy/chorwacja"}
+                className="flex-1 inline-flex items-center justify-center px-4 py-3 bg-secondary/15 hover:bg-secondary text-secondary-foreground font-body font-semibold rounded-xl border border-secondary/30 transition-all duration-300 text-sm text-center shadow-sm"
+              >
+                Dowiedz się więcej →
+              </Link>
+              <div className="flex-1">
+                <RegistrationModal defaultCruise={title} onSuccess={() => setLocalSpots(prev => prev + 1)}>
+                  <button className="w-full inline-flex items-center justify-center px-4 py-3 bg-green-500 text-white font-body font-semibold rounded-xl shadow-ocean hover:shadow-card-hover hover:bg-green-600 hover:scale-[1.02] transition-all duration-300 text-sm">
+                    Zapisz się ⛵
+                  </button>
+                </RegistrationModal>
+              </div>
             </div>
           ) : (
             <a

@@ -7,6 +7,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Gallery from "./pages/Gallery";
 import BookingForm from "./pages/BookingForm";
+import CroatiaCruise from "./pages/CroatiaCruise";
 
 const queryClient = new QueryClient();
 
@@ -18,6 +19,8 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/rejsy/chorwacja" element={<CroatiaCruise />} />
+          <Route path="/chorwacja" element={<CroatiaCruise />} />
           <Route path="/galeria/:id" element={<Gallery />} />
           <Route path="/galeria" element={<Gallery />} />
           <Route path="/zapisy/:id" element={<BookingForm />} />
