@@ -180,9 +180,9 @@ const CruiseCard = ({
             <div className="mt-6 flex flex-col sm:flex-row gap-2.5 w-full">
               <Link
                 to={detailsLink || "/rejsy/chorwacja"}
-                className="flex-1 inline-flex items-center justify-center px-4 py-3 bg-secondary/15 hover:bg-secondary text-secondary-foreground font-body font-semibold rounded-xl border border-secondary/30 transition-all duration-300 text-sm text-center shadow-sm"
+                className="flex-1 inline-flex items-center justify-center px-4 py-3 bg-orange-500 hover:bg-orange-600 text-white font-body font-semibold rounded-xl shadow-ocean hover:shadow-card-hover hover:scale-[1.02] transition-all duration-300 text-sm text-center"
               >
-                Dowiedz się więcej →
+                Więcej o rejsie →
               </Link>
               <div className="flex-1">
                 <RegistrationModal defaultCruise={title} onSuccess={() => setLocalSpots(prev => prev + 1)}>
