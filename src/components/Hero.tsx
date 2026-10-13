@@ -1,10 +1,17 @@
 import { motion } from "framer-motion";
 import heroImage from "@/assets/hero-sailing.jpg";
 import { Anchor, Wind, Waves } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
+import LanguageSwitch from "./LanguageSwitch";
 
 const Hero = () => {
+  const { t } = useLanguage();
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Floating Language Switcher */}
+      <LanguageSwitch variant="floating" />
+
       {/* Background */}
       <div className="absolute inset-0">
         <img
@@ -47,16 +54,15 @@ const Hero = () => {
           transition={{ duration: 0.8 }}
         >
           <p className="text-primary-foreground/80 font-body uppercase tracking-[0.3em] text-sm mb-4">
-            ⛵ Rybka.fun — Rejsy Żeglarskie 2026
+            {t.heroTagline}
           </p>
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-800 text-primary-foreground leading-tight mb-6">
-            Złap Wiatr
+            {t.heroTitleLine1}
             <br />
-            <span className="italic">w Żagle</span>
+            <span className="italic">{t.heroTitleLine2}</span>
           </h1>
           <p className="text-lg md:text-xl text-primary-foreground/80 font-body font-light max-w-2xl mx-auto mb-10">
-            Wyspy Kanaryjskie, Grecja, Chorwacja — trzy niezapomniane przygody czekają na Ciebie.
-            Zarezerwuj miejsce zanim zabraknie kabin!
+            {t.heroDescription}
           </p>
         </motion.div>
 
@@ -70,13 +76,13 @@ const Hero = () => {
             href="#rejsy"
             className="inline-flex items-center justify-center px-8 py-4 bg-secondary text-secondary-foreground font-body font-semibold text-lg rounded-full shadow-ocean hover:shadow-card-hover transition-all duration-300 hover:scale-105"
           >
-            Odkryj Rejsy
+            {t.heroBtnExplore}
           </a>
           <a
             href="#faq"
             className="inline-flex items-center justify-center px-8 py-4 border-2 border-primary-foreground/30 text-primary-foreground font-body font-medium text-lg rounded-full hover:bg-primary-foreground/10 transition-all duration-300"
           >
-            Masz pytania?
+            {t.heroBtnQuestions}
           </a>
         </motion.div>
 

@@ -1,28 +1,40 @@
 import { motion } from "framer-motion";
 import { Star } from "lucide-react";
-
-const testimonials = [
-  {
-    name: "Anna K.",
-    text: "Najlepsza przygoda w moim życiu! Kapitan Michał jest niesamowity, a widoki z pokładu zapierają dech.",
-    rating: 5,
-    cruise: "Chorwacja 2025",
-  },
-  {
-    name: "Tomek W.",
-    text: "Myślałem, że żeglowanie nie jest dla mnie. Po tygodniu na jachcie planuję już kolejny rejs!",
-    rating: 5,
-    cruise: "Grecja 2024",
-  },
-  {
-    name: "Kasia M.",
-    text: "Świetna organizacja, pyszne jedzenie i niezapomniane zachody słońca. Polecam każdemu!",
-    rating: 5,
-    cruise: "Wyspy Kanaryjskie 2025",
-  },
-];
+import { useLanguage } from "@/context/LanguageContext";
 
 const Testimonials = () => {
+  const { lang, t } = useLanguage();
+
+  const testimonials = [
+    {
+      name: "Anna K.",
+      text:
+        lang === "en"
+          ? "The greatest adventure of my life! Captain Michał is incredible, and the views from deck take your breath away."
+          : "Najlepsza przygoda w moim życiu! Kapitan Michał jest niesamowity, a widoki z pokładu zapierają dech.",
+      rating: 5,
+      cruise: lang === "en" ? "Croatia 2025" : "Chorwacja 2025",
+    },
+    {
+      name: "Tomek W.",
+      text:
+        lang === "en"
+          ? "I thought sailing wasn't for me. After a week aboard, I'm already planning my next cruise!"
+          : "Myślałem, że żeglowanie nie jest dla mnie. Po tygodniu na jachcie planuję już kolejny rejs!",
+      rating: 5,
+      cruise: lang === "en" ? "Greece 2024" : "Grecja 2024",
+    },
+    {
+      name: "Kasia M.",
+      text:
+        lang === "en"
+          ? "Superb organization, delicious food, and unforgettable sunsets. Recommended to everyone!"
+          : "Świetna organizacja, pyszne jedzenie i niezapomniane zachody słońca. Polecam każdemu!",
+      rating: 5,
+      cruise: lang === "en" ? "Canary Islands 2025" : "Wyspy Kanaryjskie 2025",
+    },
+  ];
+
   return (
     <section className="py-20 md:py-28 bg-ocean-gradient">
       <div className="max-w-6xl mx-auto px-6">
@@ -33,10 +45,10 @@ const Testimonials = () => {
           className="text-center mb-14"
         >
           <p className="text-sm font-body uppercase tracking-[0.2em] text-primary-foreground/70 mb-2">
-            Opinie
+            {t.testimonialsTag}
           </p>
           <h2 className="text-4xl md:text-5xl font-display font-bold text-primary-foreground">
-            Co mówią uczestnicy
+            {t.testimonialsTitle}
           </h2>
         </motion.div>
 

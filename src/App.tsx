@@ -9,26 +9,30 @@ import Gallery from "./pages/Gallery";
 import BookingForm from "./pages/BookingForm";
 import CroatiaCruise from "./pages/CroatiaCruise";
 
+import { LanguageProvider } from "@/context/LanguageContext";
+
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/rejsy/chorwacja" element={<CroatiaCruise />} />
-          <Route path="/chorwacja" element={<CroatiaCruise />} />
-          <Route path="/galeria/:id" element={<Gallery />} />
-          <Route path="/galeria" element={<Gallery />} />
-          <Route path="/zapisy/:id" element={<BookingForm />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
+    <LanguageProvider>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/rejsy/chorwacja" element={<CroatiaCruise />} />
+            <Route path="/chorwacja" element={<CroatiaCruise />} />
+            <Route path="/galeria/:id" element={<Gallery />} />
+            <Route path="/galeria" element={<Gallery />} />
+            <Route path="/zapisy/:id" element={<BookingForm />} />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </TooltipProvider>
+    </LanguageProvider>
   </QueryClientProvider>
 );
 

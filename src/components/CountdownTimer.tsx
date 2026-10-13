@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface CountdownProps {
   targetDate: Date;
@@ -7,6 +8,7 @@ interface CountdownProps {
 }
 
 const CountdownTimer = ({ targetDate, label }: CountdownProps) => {
+  const { t } = useLanguage();
   const [timeLeft, setTimeLeft] = useState(getTimeLeft());
 
   function getTimeLeft() {
@@ -26,10 +28,10 @@ const CountdownTimer = ({ targetDate, label }: CountdownProps) => {
   }, []);
 
   const units = [
-    { value: timeLeft.days, label: "dni" },
-    { value: timeLeft.hours, label: "godz" },
-    { value: timeLeft.minutes, label: "min" },
-    { value: timeLeft.seconds, label: "sek" },
+    { value: timeLeft.days, label: t.unitDays },
+    { value: timeLeft.hours, label: t.unitHours },
+    { value: timeLeft.minutes, label: t.unitMinutes },
+    { value: timeLeft.seconds, label: t.unitSeconds },
   ];
 
   return (

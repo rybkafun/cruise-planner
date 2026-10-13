@@ -1,30 +1,33 @@
 import { motion } from "framer-motion";
 import { Compass, Shield, Smile, Utensils } from "lucide-react";
-
-const features = [
-  {
-    icon: Compass,
-    title: "Doświadczeni Kapitanowie",
-    desc: "Rejsy pod okiem certyfikowanych kapitanów z wieloletnim doświadczeniem.",
-  },
-  {
-    icon: Shield,
-    title: "Bezpieczeństwo",
-    desc: "Pełne wyposażenie ratunkowe i ubezpieczenie dla każdego uczestnika.",
-  },
-  {
-    icon: Utensils,
-    title: "Wyżywienie w cenie",
-    desc: "Kasa okrętowa obejmuje wyżywienie, paliwo i opłaty portowe.",
-  },
-  {
-    icon: Smile,
-    title: "Fun Gwarantowany",
-    desc: "SUP, ponton, regaty, snorkeling — przygoda na każdym kroku!",
-  },
-];
+import { useLanguage } from "@/context/LanguageContext";
 
 const WhyUs = () => {
+  const { t } = useLanguage();
+
+  const features = [
+    {
+      icon: Compass,
+      title: t.feature1Title,
+      desc: t.feature1Desc,
+    },
+    {
+      icon: Shield,
+      title: t.feature2Title,
+      desc: t.feature2Desc,
+    },
+    {
+      icon: Utensils,
+      title: t.feature3Title,
+      desc: t.feature3Desc,
+    },
+    {
+      icon: Smile,
+      title: t.feature4Title,
+      desc: t.feature4Desc,
+    },
+  ];
+
   return (
     <section className="py-20 md:py-28 bg-background">
       <div className="max-w-6xl mx-auto px-6">
@@ -35,10 +38,10 @@ const WhyUs = () => {
           className="text-center mb-16"
         >
           <p className="text-sm font-body uppercase tracking-[0.2em] text-primary mb-2">
-            Dlaczego my?
+            {t.whyUsTag}
           </p>
           <h2 className="text-4xl md:text-5xl font-display font-bold text-foreground">
-            Więcej niż zwykły rejs
+            {t.whyUsTitle}
           </h2>
         </motion.div>
 
@@ -69,3 +72,4 @@ const WhyUs = () => {
 };
 
 export default WhyUs;
+

@@ -31,6 +31,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { cruises } from "@/lib/cruises";
 import { toast } from "sonner";
+import { useLanguage } from "@/context/LanguageContext";
 
 const formSchema = z.object({
     name: z.string().min(2, "Imię i nazwisko musi mieć co najmniej 2 znaki"),
@@ -47,6 +48,7 @@ interface RegistrationModalProps {
 }
 
 export const RegistrationModal = ({ children, defaultCruise = "", onSuccess }: RegistrationModalProps) => {
+    const { lang, t } = useLanguage();
     const [isOpen, setIsOpen] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [showFullModal, setShowFullModal] = useState(false);
@@ -90,16 +92,16 @@ export const RegistrationModal = ({ children, defaultCruise = "", onSuccess }: R
             }
 
             if (responseData.isReserve) {
-                toast.success("Niestety skończyły się nam miejsca na ten rejs, zapiszemy Cię na listę rezerwową", { duration: 6000 });
+                toast.success(t.modalSuccessReserve, { duration: 6000 });
             } else {
-                toast.success("Dziękujemy za zgłoszenie, pozostajemy w kontakcie!");
+                toast.success(t.modalSuccess);
             }
             setIsOpen(false);
             form.reset();
             onSuccess?.();
         } catch (error) {
             console.error("Submission error:", error);
-            toast.error("Wystąpił błąd. Spróbuj ponownie później.");
+            toast.error(t.modalError);
         } finally {
             setIsSubmitting(false);
         }
@@ -111,10 +113,9 @@ export const RegistrationModal = ({ children, defaultCruise = "", onSuccess }: R
                 <DialogTrigger asChild>{children}</DialogTrigger>
                 <DialogContent className="sm:max-w-[425px]">
                     <DialogHeader>
-                        <DialogTitle>Zapisz się na rejs</DialogTitle>
+                        <DialogTitle>{t.modalTitle}</DialogTitle>
                         <DialogDescription>
-                            Zostaw nam swoje dane, a skontaktujemy się z Tobą w celu ustalenia
-                            szczegółów.
+                            {t.modalDesc}
                         </DialogDescription>
                     </DialogHeader>
                     <Form {...form}>
@@ -124,9 +125,9 @@ export const RegistrationModal = ({ children, defaultCruise = "", onSuccess }: R
                                 name="name"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel>Imię i Nazwisko</FormLabel>
+                                        <FormLabel>{t.modalNameLabel}</FormLabel>
                                         <FormControl>
-                                            <Input placeholder="Jan Kowalski" {...field} />
+                                            <Input placeholder={t.modalNamePlaceholder} {...field} />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
@@ -137,9 +138,9 @@ export const RegistrationModal = ({ children, defaultCruise = "", onSuccess }: R
                                 name="email"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel>Email</FormLabel>
+                                        <FormLabel>{t.modalEmailLabel}</FormLabel>
                                         <FormControl>
-                                            <Input placeholder="jan@example.com" type="email" {...field} />
+                                            <Input placeholder={t.modalEmailPlaceholder} type="email" {...field} />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
@@ -150,9 +151,9 @@ export const RegistrationModal = ({ children, defaultCruise = "", onSuccess }: R
                                 name="phone"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel>Numer telefonu</FormLabel>
+                                        <FormLabel>{t.modalPhoneLabel}</FormLabel>
                                         <FormControl>
-                                            <Input placeholder="+48 123 456 789" type="tel" {...field} />
+                                            <Input placeholder={t.modalPhonePlaceholder} type="tel" {...field} />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
@@ -163,19 +164,23 @@ export const RegistrationModal = ({ children, defaultCruise = "", onSuccess }: R
                                 name="cruise"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel>Wybierz rejs</FormLabel>
+                                        <FormLabel>{t.modalCruiseLabel}</FormLabel>
                                         <Select onValueChange={field.onChange} defaultValue={field.value}>
                                             <FormControl>
                                                 <SelectTrigger>
-                                                    <SelectValue placeholder="Wybierz interesujący Cię rejs" />
+                                                    <SelectValue placeholder={t.modalCruisePlaceholder} />
                                                 </SelectTrigger>
                                             </FormControl>
                                             <SelectContent>
-                                                {cruises.map((cruise) => (
-                                                    <SelectItem key={cruise.title} value={cruise.title}>
-                                                        {cruise.title} ({cruise.date})
-                                                    </SelectItem>
-                                                ))}
+                                                {cruises.map((cruise) => {
+                                                    const cruiseName = lang === "en" && cruise.titleEn ? cruise.titleEn : cruise.title;
+                                                    const cruiseDate = lang === "en" && cruise.dateEn ? cruise.dateEn : cruise.date;
+                                                    return (
+                                                        <SelectItem key={cruise.title} value={cruise.title}>
+                                                            {cruiseName} ({cruiseDate})
+                                                        </SelectItem>
+                                                    );
+                                                })}
                                             </SelectContent>
                                         </Select>
                                         <FormMessage />
@@ -187,16 +192,16 @@ export const RegistrationModal = ({ children, defaultCruise = "", onSuccess }: R
                                 name="message"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel>Poznajmy się: (opcjonalnie)</FormLabel>
+                                        <FormLabel>{t.modalMsgLabel}</FormLabel>
                                         <FormControl>
-                                            <Textarea placeholder="Napisz coś o sobie, dlaczego chcesz popłynąć lub czy masz doświadczenie..." className="resize-none" rows={3} {...field} />
+                                            <Textarea placeholder={t.modalMsgPlaceholder} className="resize-none" rows={3} {...field} />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
                                 )}
                             />
                             <Button type="submit" className="w-full" disabled={isSubmitting}>
-                                {isSubmitting ? "Wysyłanie..." : "Wyślij zgłoszenie"}
+                                {isSubmitting ? t.modalSubmitting : t.modalSubmitBtn}
                             </Button>
                         </form>
                     </Form>
@@ -206,9 +211,9 @@ export const RegistrationModal = ({ children, defaultCruise = "", onSuccess }: R
             <Dialog open={showFullModal} onOpenChange={setShowFullModal}>
                 <DialogContent className="sm:max-w-[425px] z-[60]">
                     <DialogHeader>
-                        <DialogTitle>Brak wolnych miejsc</DialogTitle>
+                        <DialogTitle>{t.modalFullTitle}</DialogTitle>
                         <DialogDescription className="text-base text-foreground mt-4 leading-relaxed">
-                            Tu kapitan {fullCaptainName}, mam jacht wypełniony po brzegi w tym terminie. Wybierz inny termin lub skontaktuj się z nami, z pewnością coś wymyślimy.
+                            {t.modalFullDesc(fullCaptainName)}
                         </DialogDescription>
                     </DialogHeader>
                     <div className="flex justify-center mt-6">
@@ -220,7 +225,7 @@ export const RegistrationModal = ({ children, defaultCruise = "", onSuccess }: R
                             }}
                             className="w-full"
                         >
-                            Płynę w innym terminie
+                            {t.modalFullBtn}
                         </Button>
                     </div>
                 </DialogContent>

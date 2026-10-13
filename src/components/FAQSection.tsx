@@ -1,36 +1,56 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
-
-const faqData = [
-  {
-    q: "Czy transport jest zorganizowany?",
-    a: "Transport organizujemy we własnym zakresie — to najlepsza i najbardziej elastyczna opcja. Chętnie pomożemy z poradami dotyczącymi lotów i dojazdów do mariny.",
-  },
-  {
-    q: "Co ze sobą zabrać?",
-    a: "Lekkie, wygodne ubrania, krem z filtrem, okulary przeciwsłoneczne, miękką torbę (nie walizka!), buty na zmianę na pokład i dobry humor. Szczegółową listę wysyłamy przed rejsem.",
-  },
-  {
-    q: "Czy są ograniczenia wiekowe?",
-    a: "Nie ma formalnych ograniczeń. Rejsy są otwarte dla dorosłych w każdym wieku. Dzieci mogą uczestniczyć pod opieką rodzica — skontaktuj się z nami, aby omówić szczegóły.",
-  },
-  {
-    q: "Czy umiejętności żeglarskie są wymagane?",
-    a: "Absolutnie nie! Rejs prowadzą doświadczeni kapitanowie. Możesz się uczyć żeglarstwa w trakcie lub po prostu odpoczywać — wybór należy do Ciebie.",
-  },
-  {
-    q: "Jak radzić sobie z chorobą morską?",
-    a: "Większość osób nie odczuwa choroby morskiej na jachtach żaglowych. Na wszelki wypadek polecamy tabletki na chorobę lokomocyjną i opaski akupresurowe. Pływamy też blisko brzegu, więc fale są łagodne.",
-  },
-  {
-    q: "Czy są spotkania przedrejsowe?",
-    a: "Tak! Organizujemy spotkanie online lub osobiste przed każdym rejsem, aby poznać się nawzajem, omówić plan i odpowiedzieć na wszelkie pytania.",
-  },
-];
+import { useLanguage } from "@/context/LanguageContext";
 
 const FAQSection = () => {
+  const { lang, t } = useLanguage();
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  const faqData = [
+    {
+      q: lang === "en" ? "Is transportation organized?" : "Czy transport jest zorganizowany?",
+      a:
+        lang === "en"
+          ? "We organize travel individually — it offers the greatest flexibility. We're happy to advise on flights and ground transfers directly to the marina."
+          : "Transport organizujemy we własnym zakresie — to najlepsza i najbardziej elastyczna opcja. Chętnie pomożemy z poradami dotyczącymi lotów i dojazdów do mariny.",
+    },
+    {
+      q: lang === "en" ? "What should I pack?" : "Co ze sobą zabrać?",
+      a:
+        lang === "en"
+          ? "Light, comfortable clothing, sunscreen, sunglasses, a soft duffel bag (no hard suitcases!), boat deck shoes, and great spirits. We send a full checklist beforehand."
+          : "Lekkie, wygodne ubrania, krem z filtrem, okulary przeciwsłoneczne, miękką torbę (nie walizka!), buty na zmianę na pokład i dobry humor. Szczegółową listę wysyłamy przed rejsem.",
+    },
+    {
+      q: lang === "en" ? "Are there age restrictions?" : "Czy są ograniczenia wiekowe?",
+      a:
+        lang === "en"
+          ? "No formal restrictions. Cruises are open to adults of all ages. Children can join under parental care — reach out to discuss specifics."
+          : "Nie ma formalnych ograniczeń. Rejsy są otwarte dla dorosłych w każdym wieku. Dzieci mogą uczestniczyć pod opieką rodzica — skontaktuj się z nami, aby omówić szczegóły.",
+    },
+    {
+      q: lang === "en" ? "Are sailing skills required?" : "Czy umiejętności żeglarskie są wymagane?",
+      a:
+        lang === "en"
+          ? "Not at all! Every cruise is skippered by certified, experienced captains. You can practice sailing or simply lounge and unwind — the choice is yours."
+          : "Absolutnie nie! Rejs prowadzą doświadczeni kapitanowie. Możesz się uczyć żeglarstwa w trakcie lub po prostu odpoczywać — wybór należy do Ciebie.",
+    },
+    {
+      q: lang === "en" ? "How do we handle seasickness?" : "Jak radzić sobie z chorobą morską?",
+      a:
+        lang === "en"
+          ? "Most guests never experience seasickness on large cruising yachts. For peace of mind, motion sickness pills or acupressure bands work wonders. We navigate coastal waters with mild waves."
+          : "Większość osób nie odczuwa choroby morskiej na jachtach żaglowych. Na wszelki wypadek polecamy tabletki na chorobę lokomocyjną i opaski akupresurowe. Pływamy też blisko brzegu, więc fale są łagodne.",
+    },
+    {
+      q: lang === "en" ? "Are there pre-cruise meetings?" : "Czy są spotkania przedrejsowe?",
+      a:
+        lang === "en"
+          ? "Yes! We host an online or in-person briefing before every voyage to meet the crew, walk through the itinerary, and address any questions."
+          : "Tak! Organizujemy spotkanie online lub osobiste przed każdym rejsem, aby poznać się nawzajem, omówić plan i odpowiedzieć na wszelkie pytania.",
+    },
+  ];
 
   return (
     <section id="faq" className="py-20 md:py-28 bg-sand-gradient">
@@ -42,10 +62,10 @@ const FAQSection = () => {
           className="text-center mb-14"
         >
           <p className="text-sm font-body uppercase tracking-[0.2em] text-primary mb-2">
-            FAQ
+            {t.faqTag}
           </p>
           <h2 className="text-4xl md:text-5xl font-display font-bold text-foreground">
-            Masz pytania? 🙂
+            {t.faqTitle}
           </h2>
         </motion.div>
 

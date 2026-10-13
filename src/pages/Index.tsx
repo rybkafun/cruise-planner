@@ -8,8 +8,10 @@ import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
 
 import { cruises } from "@/lib/cruises";
+import { useLanguage } from "@/context/LanguageContext";
 
 const Index = () => {
+  const { t } = useLanguage();
   const [spotsData, setSpotsData] = useState<Record<string, number>>({});
 
   useEffect(() => {
@@ -36,10 +38,10 @@ const Index = () => {
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16">
             <p className="text-sm font-body uppercase tracking-[0.2em] text-primary mb-2">
-              Sezon 2026
+              {t.season2026}
             </p>
             <h2 className="text-4xl md:text-5xl font-display font-bold text-foreground">
-              Wybierz swój rejs
+              {t.chooseYourCruise}
             </h2>
           </div>
 

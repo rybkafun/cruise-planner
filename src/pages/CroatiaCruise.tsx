@@ -17,11 +17,13 @@ import {
   LifeBuoy,
 } from "lucide-react";
 import kornatiImage from "@/assets/kornati-park.jpg";
-import croatiaImg from "@/assets/croatia-sailing.jpg";
 import { RegistrationModal } from "@/components/RegistrationModal";
 import Footer from "@/components/Footer";
+import { useLanguage } from "@/context/LanguageContext";
+import LanguageSwitch from "@/components/LanguageSwitch";
 
 const CroatiaCruise = () => {
+  const { lang, t } = useLanguage();
   const cruiseTitle = "Chorwacja słoneczna kraina";
 
   return (
@@ -34,15 +36,16 @@ const CroatiaCruise = () => {
             className="inline-flex items-center gap-2 text-sm font-body font-medium text-muted-foreground hover:text-primary transition-colors"
           >
             <ArrowLeft size={18} />
-            <span>Wróć do wszystkich rejsów</span>
+            <span>{t.navBackToAll}</span>
           </Link>
           <div className="flex items-center gap-3">
+            <LanguageSwitch variant="inline" />
             <span className="hidden sm:inline-block text-xs font-semibold uppercase tracking-wider text-secondary bg-secondary/10 px-3 py-1 rounded-full">
-              24–31.10.2026
+              {t.croatiaTermValue}
             </span>
             <RegistrationModal defaultCruise={cruiseTitle}>
               <button className="inline-flex items-center justify-center px-4 py-2 bg-green-500 hover:bg-green-600 text-white font-body font-semibold text-xs sm:text-sm rounded-full shadow-sm hover:scale-105 transition-all">
-                Zapisz się ⛵
+                {t.btnBookNow}
               </button>
             </RegistrationModal>
           </div>
@@ -69,31 +72,31 @@ const CroatiaCruise = () => {
           >
             <div className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-md border border-white/25 rounded-full px-4 py-1.5 mb-6 text-xs sm:text-sm tracking-wide font-medium">
               <Sun size={16} className="text-amber-400" />
-              <span>Jesienny Reset na Adriatyku • 24–31 października 2026 r.</span>
+              <span>{t.croatiaBadge}</span>
             </div>
 
             <h1 className="text-4xl sm:text-6xl md:text-7xl font-display font-extrabold tracking-tight leading-tight mb-6 text-white drop-shadow-md">
-              Chorwacja: Kornati & Krka
+              {t.croatiaHeroTitle}
               <span className="block text-2xl sm:text-3xl md:text-4xl font-body font-light text-amber-200 mt-2">
-                Zamiast jesieni pod kocykiem — żeglarski reset marzeń
+                {t.croatiaHeroSubtitle}
               </span>
             </h1>
 
             <p className="text-lg sm:text-xl text-white/90 max-w-2xl mx-auto font-body font-light leading-relaxed mb-8 drop-shadow">
-              Ciepłe morze, labirynt 1001 wysp, spektakularne wodospady i błogi spokój bez wakacyjnych tłumów.
+              {t.croatiaHeroDesc}
             </p>
 
             <div className="flex flex-wrap items-center justify-center gap-4">
               <RegistrationModal defaultCruise={cruiseTitle}>
                 <button className="px-8 py-4 bg-green-500 hover:bg-green-600 text-white font-body font-bold text-base rounded-full shadow-lg hover:shadow-green-500/30 hover:scale-105 transition-all duration-300">
-                  Zapraszamy na Rejs →
+                  {t.croatiaHeroBtnCta}
                 </button>
               </RegistrationModal>
               <a
                 href="#opis"
                 className="px-6 py-4 bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/30 text-white font-body font-medium text-base rounded-full transition-all duration-300"
               >
-                Zobacz szczegóły trasy ↓
+                {t.croatiaHeroBtnRoute}
               </a>
             </div>
           </motion.div>
@@ -105,30 +108,30 @@ const CroatiaCruise = () => {
         <div className="max-w-5xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
           <div className="flex flex-col items-center">
             <Calendar className="text-primary mb-1.5" size={24} />
-            <span className="text-xs uppercase text-muted-foreground font-semibold">Termin</span>
+            <span className="text-xs uppercase text-muted-foreground font-semibold">{t.croatiaTermLabel}</span>
             <span className="font-display font-bold text-base md:text-lg text-foreground">
-              24–31.10.2026
+              {t.croatiaTermValue}
             </span>
           </div>
           <div className="flex flex-col items-center">
             <MapPin className="text-primary mb-1.5" size={24} />
-            <span className="text-xs uppercase text-muted-foreground font-semibold">Start & Meta</span>
+            <span className="text-xs uppercase text-muted-foreground font-semibold">{t.croatiaStartFinishLabel}</span>
             <span className="font-display font-bold text-base md:text-lg text-foreground">
-              Zadar / Sukošan
+              {lang === "en" ? "Zadar / Sukošan, Croatia" : "Zadar / Sukošan"}
             </span>
           </div>
           <div className="flex flex-col items-center">
             <Ship className="text-primary mb-1.5" size={24} />
-            <span className="text-xs uppercase text-muted-foreground font-semibold">Jacht</span>
+            <span className="text-xs uppercase text-muted-foreground font-semibold">{t.croatiaYachtLabel}</span>
             <span className="font-display font-bold text-base md:text-lg text-foreground">
               Hanse 455 / 458
             </span>
           </div>
           <div className="flex flex-col items-center">
             <Users className="text-primary mb-1.5" size={24} />
-            <span className="text-xs uppercase text-muted-foreground font-semibold">Załoga</span>
+            <span className="text-xs uppercase text-muted-foreground font-semibold">{t.croatiaCrewLabel}</span>
             <span className="font-display font-bold text-base md:text-lg text-foreground">
-              8 osób (4 kabiny)
+              {t.croatiaCrewValue}
             </span>
           </div>
         </div>
@@ -143,18 +146,11 @@ const CroatiaCruise = () => {
           </div>
           <div className="relative z-10 max-w-3xl">
             <h2 className="text-3xl sm:text-4xl font-display font-bold text-foreground mb-6">
-              Ahoj, Pasjonaci Przygody!
+              {t.croatiaIntroTitle}
             </h2>
             <div className="space-y-4 text-base sm:text-lg text-foreground/85 font-body leading-relaxed">
-              <p>
-                <strong>Zamiast spędzać jesień pod kocykiem</strong>, zapraszam na tydzień konkretnego
-                żeglarskiego resetu w Chorwacji.
-              </p>
-              <p>
-                Pływamy w terminie <strong>24–31 października 2026 r.</strong> – to absolutnie najlepszy moment
-                na Adriatyk: woda wciąż trzyma ciepło po lecie, wiatr dopisuje, a na wodzie i w urokliwych
-                marinas panuje błogi spokój bez letniego zgiełku i wakacyjnych tłumów.
-              </p>
+              <p>{t.croatiaIntroP1}</p>
+              <p>{t.croatiaIntroP2}</p>
             </div>
           </div>
         </section>
@@ -169,14 +165,13 @@ const CroatiaCruise = () => {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-6 sm:p-10 text-white">
               <span className="inline-block bg-primary/90 text-primary-foreground text-xs font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full mb-3 self-start">
-                Zdjęcie z Trasy
+                {t.croatiaPhotoTag}
               </span>
               <h3 className="text-2xl sm:text-3xl font-display font-bold mb-2">
-                Park Narodowy Kornati („1001 wysp”)
+                {t.croatiaPhotoTitle}
               </h3>
               <p className="text-sm sm:text-base text-white/90 font-body max-w-2xl">
-                Księżycowy, surowy archipelag, lazurowe zatoczki, żegluga labiryntem wysp i niezapomniane wieczory
-                na kotwicy pod rozgwieżdżonym niebem.
+                {t.croatiaPhotoDesc}
               </p>
             </div>
           </div>
@@ -185,12 +180,12 @@ const CroatiaCruise = () => {
         {/* Trasa Marzeń - Itinerary Highlights */}
         <section className="space-y-8">
           <div className="text-center max-w-2xl mx-auto">
-            <span className="text-xs uppercase tracking-widest font-bold text-primary">Niezwykłe Miejsca</span>
+            <span className="text-xs uppercase tracking-widest font-bold text-primary">{t.croatiaRouteTag}</span>
             <h2 className="text-3xl sm:text-4xl font-display font-bold text-foreground mt-1">
-              W planie mamy trasę marzeń
+              {t.croatiaRouteTitle}
             </h2>
             <p className="text-muted-foreground font-body mt-2">
-              Połączenie dzikiej, nieskażonej natury z klimatycznymi miasteczkami Dalmacji.
+              {t.croatiaRouteDesc}
             </p>
           </div>
 
@@ -201,11 +196,10 @@ const CroatiaCruise = () => {
                 <Sun size={26} />
               </div>
               <h3 className="text-xl font-display font-bold text-card-foreground mb-3">
-                Park Narodowy Kornati
+                {t.croatiaSpot1Title}
               </h3>
               <p className="text-muted-foreground font-body text-sm leading-relaxed flex-1">
-                Księżycowy, surowy archipelag „1001 wysp”, krystaliczne, lazurowe zatoczki, żegluga labiryntem
-                wysepek i wieczory na kotwicy pod rozgwieżdżonym dalmatyńskim niebem.
+                {t.croatiaSpot1Desc}
               </p>
             </div>
 
@@ -215,11 +209,10 @@ const CroatiaCruise = () => {
                 <Waves size={26} />
               </div>
               <h3 className="text-xl font-display font-bold text-card-foreground mb-3">
-                Park Narodowy Krka
+                {t.croatiaSpot2Title}
               </h3>
               <p className="text-muted-foreground font-body text-sm leading-relaxed flex-1">
-                Spektakularny rejs kanionem rzeki aż do urokliwego Skradinu, połączony ze spacerem wśród słynnych,
-                kaskadowych wodospadów i bujnej zieleni.
+                {t.croatiaSpot2Desc}
               </p>
             </div>
 
@@ -229,11 +222,10 @@ const CroatiaCruise = () => {
                 <Compass size={26} />
               </div>
               <h3 className="text-xl font-display font-bold text-card-foreground mb-3">
-                Klimatyczne Perełki Dalmacji
+                {t.croatiaSpot3Title}
               </h3>
               <p className="text-muted-foreground font-body text-sm leading-relaxed flex-1">
-                Po drodze odwiedzimy m.in. historyczny <strong>Szybenik</strong> z wpisaną na listę UNESCO katedrą
-                św. Jakuba oraz malowniczy, wcinający się w morze <strong>Primošten</strong>.
+                {t.croatiaSpot3Desc}
               </p>
             </div>
           </div>
@@ -246,41 +238,34 @@ const CroatiaCruise = () => {
             <div>
               <div className="inline-flex items-center gap-2 text-primary font-semibold text-xs uppercase tracking-wider mb-3">
                 <LifeBuoy size={16} />
-                <span>Bez stresu i pośpiechu</span>
+                <span>{t.croatiaCharTag}</span>
               </div>
               <h3 className="text-2xl sm:text-3xl font-display font-bold text-card-foreground mb-4">
-                Charakter rejsu: czysty relaks
+                {t.croatiaCharTitle}
               </h3>
               <p className="text-muted-foreground font-body text-base leading-relaxed mb-6">
-                Rejs ma charakter <strong>rekreacyjny</strong> – nie musisz mieć żadnego wcześniejszego
-                doświadczenia na wodzie!
+                {t.croatiaCharDesc}
               </p>
 
               <ul className="space-y-3.5 text-sm sm:text-base font-body text-foreground/90">
                 <li className="flex items-start gap-3">
                   <CheckCircle2 size={20} className="text-green-500 shrink-0 mt-0.5" />
-                  <span>
-                    <strong>Chętni:</strong> nauczą się pracy na żaglach, obsługi jachtu i z dumą staną za sterem pod okiem skippera.
-                  </span>
+                  <span>{t.croatiaCharPoint1}</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 size={20} className="text-green-500 shrink-0 mt-0.5" />
-                  <span>
-                    <strong>Szukający odpoczynku:</strong> mnóstwo czasu na orzeźwiające kąpiele, lekturę, opalanie i beztroski reset.
-                  </span>
+                  <span>{t.croatiaCharPoint2}</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 size={20} className="text-green-500 shrink-0 mt-0.5" />
-                  <span>
-                    <strong>Wieczorne biesiady:</strong> degustacja świeżych owoców morza i lokalnego wina w klimatycznych chorwackich konobach.
-                  </span>
+                  <span>{t.croatiaCharPoint3}</span>
                 </li>
               </ul>
             </div>
 
             <div className="mt-8 pt-6 border-t border-border flex items-center gap-3 text-muted-foreground text-sm font-body">
               <Wine size={18} className="text-secondary shrink-0" />
-              <span>Idealna równowaga między aktywną żeglugą a chilloutem.</span>
+              <span>{t.croatiaCharFooter}</span>
             </div>
           </div>
 
@@ -289,38 +274,37 @@ const CroatiaCruise = () => {
             <div>
               <div className="inline-flex items-center gap-2 text-primary font-semibold text-xs uppercase tracking-wider mb-3">
                 <Ship size={16} />
-                <span>Twój pływający dom</span>
+                <span>{t.croatiaYachtTag}</span>
               </div>
               <h3 className="text-2xl sm:text-3xl font-display font-bold text-card-foreground mb-4">
-                Komfortowy jacht Hanse 455 / 458
+                {t.croatiaYachtTitle}
               </h3>
               <p className="text-muted-foreground font-body text-base leading-relaxed mb-6">
-                Zakwaterowanie na nowoczesnym jachcie żaglowym z przestronną messą i obszernym kokpitem idealnym
-                do wspólnych posiłków.
+                {t.croatiaYachtDesc}
               </p>
 
               <div className="space-y-4">
                 <div className="flex items-center gap-4 p-3.5 bg-muted/40 rounded-xl border border-border/50">
                   <Bed size={22} className="text-primary shrink-0" />
                   <div>
-                    <span className="font-semibold block text-sm">4 wygodne dwuosobowe kabiny</span>
-                    <span className="text-xs text-muted-foreground">Kameralna załoga: łącznie tylko 8 osób na jachcie</span>
+                    <span className="font-semibold block text-sm">{t.croatiaYachtCabins}</span>
+                    <span className="text-xs text-muted-foreground">{t.croatiaYachtCabinsDesc}</span>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-4 p-3.5 bg-muted/40 rounded-xl border border-border/50">
                   <Waves size={22} className="text-primary shrink-0" />
                   <div>
-                    <span className="font-semibold block text-sm">Opuszczana platforma kąpielowa</span>
-                    <span className="text-xs text-muted-foreground">Czynna 24h na dobę – skoki wprost do turkusowej wody :-)</span>
+                    <span className="font-semibold block text-sm">{t.croatiaYachtPlatform}</span>
+                    <span className="text-xs text-muted-foreground">{t.croatiaYachtPlatformDesc}</span>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-4 p-3.5 bg-muted/40 rounded-xl border border-border/50">
                   <Sparkles size={22} className="text-primary shrink-0" />
                   <div>
-                    <span className="font-semibold block text-sm">Wygodna messa i w pełni wyposażona kuchnia</span>
-                    <span className="text-xs text-muted-foreground">Lodówki, kuchenka, ciepła woda, prysznice</span>
+                    <span className="font-semibold block text-sm">{t.croatiaYachtAmenities}</span>
+                    <span className="text-xs text-muted-foreground">{t.croatiaYachtAmenitiesDesc}</span>
                   </div>
                 </div>
               </div>
@@ -328,12 +312,12 @@ const CroatiaCruise = () => {
 
             <div className="mt-8 pt-6 border-t border-border flex items-center justify-between">
               <div>
-                <span className="text-xs uppercase text-muted-foreground block font-semibold">Cena rejsu</span>
+                <span className="text-xs uppercase text-muted-foreground block font-semibold">{t.croatiaPriceLabel}</span>
                 <span className="text-3xl font-display font-bold text-foreground">350 €</span>
-                <span className="text-xs text-muted-foreground ml-1">/os. + kasa okrętowa</span>
+                <span className="text-xs text-muted-foreground ml-1">{t.croatiaPriceNote}</span>
               </div>
               <span className="text-xs font-semibold text-green-600 bg-green-500/10 px-3 py-1.5 rounded-full border border-green-500/20">
-                Świetny stosunek jakości
+                {t.croatiaPriceValueBadge}
               </span>
             </div>
           </div>
@@ -343,21 +327,21 @@ const CroatiaCruise = () => {
         <section className="bg-gradient-to-br from-primary via-primary/95 to-ocean-deep text-primary-foreground rounded-3xl p-8 sm:p-14 shadow-2xl relative overflow-hidden">
           <div className="relative z-10 max-w-3xl mx-auto text-center space-y-6">
             <span className="inline-block bg-white/20 backdrop-blur-sm text-white text-xs uppercase tracking-widest font-bold px-4 py-1.5 rounded-full">
-              Liczba miejsc ściśle ograniczona (8 osób)
+              {t.croatiaCtaBadge}
             </span>
 
             <h2 className="text-3xl sm:text-5xl font-display font-bold leading-tight">
-              Jeszcze nie jest za późno na zgłoszenie!
+              {t.croatiaCtaTitle}
             </h2>
 
             <p className="text-base sm:text-xl text-primary-foreground/90 font-body max-w-2xl mx-auto leading-relaxed">
-              Nie czekaj – wzywa ciepłe morze, kąpiele, słońce i witamina D! Zapisz się na rejs do końca tygodnia.
+              {t.croatiaCtaDesc}
             </p>
 
             <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
               <RegistrationModal defaultCruise={cruiseTitle}>
                 <button className="w-full sm:w-auto px-10 py-4 bg-green-500 hover:bg-green-600 text-white font-body font-bold text-lg rounded-full shadow-lg hover:shadow-green-500/40 hover:scale-105 transition-all duration-300">
-                  Zapraszamy na Rejs →
+                  {t.croatiaCtaBtn}
                 </button>
               </RegistrationModal>
             </div>
@@ -365,11 +349,11 @@ const CroatiaCruise = () => {
             <div className="pt-6 border-t border-white/20 mt-6 flex flex-wrap items-center justify-center gap-6 text-white/80 text-sm">
               <span className="flex items-center gap-2">
                 <CheckCircle2 size={16} className="text-green-300" />
-                Zapisy wyłącznie przez formularz online
+                {t.croatiaOnlineOnlyNote}
               </span>
               <span className="flex items-center gap-2">
                 <CheckCircle2 size={16} className="text-green-300" />
-                Szybkie potwierdzenie rezerwacji
+                {t.croatiaQuickConfirmNote}
               </span>
             </div>
           </div>
@@ -382,7 +366,7 @@ const CroatiaCruise = () => {
             className="inline-flex items-center gap-2 text-sm font-body font-semibold text-primary hover:underline"
           >
             <ArrowLeft size={16} />
-            <span>Wróć do strony głównej i pozostałych rejsów</span>
+            <span>{t.navBackToAll}</span>
           </Link>
         </div>
       </main>
